@@ -33,28 +33,33 @@
             overflow-x: hidden;
         }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            background-color: var(--primary-navy);
-            color: var(--text-light);
-            position: relative;
-            padding-bottom: 4rem;
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            overflow: hidden;
+        /* --- STICKY NAV HEADER (iOS Style) --- */
+        #main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            padding: 1rem 0;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+        #main-header.scrolled {
+            background-color: rgba(15, 43, 70, 0.85); /* Translucent Navy */
+            backdrop-filter: blur(20px); /* iOS Blur Effect */
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 0; /* Slightly smaller on scroll */
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start; /* Align to top to handle stacked buttons */
-            padding: 1.5rem 0;
+            align-items: flex-start;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
         }
 
         .brand {
@@ -74,11 +79,11 @@
             border: 2px solid rgba(255,255,255,0.2);
         }
 
-        /* Nav Buttons - Stacked on Right */
+        /* Nav Buttons */
         .nav-actions {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             align-items: flex-end;
         }
 
@@ -117,12 +122,30 @@
             border-color: white;
         }
 
+        /* --- HERO SECTION --- */
+        .hero {
+            background-color: var(--primary-navy);
+            color: var(--text-light);
+            position: relative;
+            padding-bottom: 4rem;
+            padding-top: 140px; /* Added padding to clear fixed header */
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
         .hero-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 1rem;
             gap: 3rem;
         }
 
@@ -175,7 +198,6 @@
             width: 280px;
             height: 560px;
             margin: 0 auto;
-            /* Removed perspective/3d styles for flat look */
             z-index: 1;
         }
 
@@ -188,7 +210,6 @@
             box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             position: relative;
-            /* Removed rotateY */
             transition: transform 0.5s ease;
         }
         
@@ -219,7 +240,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            padding-top: 35px; /* Clear notch */
+            padding-top: 0; /* REMOVED PADDING as requested */
             object-fit: cover; 
             background: white;
             opacity: 0;
@@ -273,8 +294,8 @@
 
         /* iPhone 12 Mini Style Frame for Features */
         .iphone-mini {
-            width: 260px; /* Slightly smaller for features */
-            height: 540px; /* Aspect ratio approx 19.5:9 */
+            width: 260px;
+            height: 540px;
             background: #111;
             border-radius: 35px;
             border: 6px solid #222;
@@ -288,7 +309,7 @@
             height: 100%;
             object-fit: cover;
             background: white;
-            padding-top: 30px; /* Notch spacing */
+            padding-top: 30px; /* Keep padding here so features look clean */
         }
 
         .iphone-mini::after {
@@ -469,8 +490,9 @@
 
         /* --- MOBILE BREAKPOINT --- */
         @media (max-width: 768px) {
+            /* On mobile, keep brand left and buttons right */
             .navbar {
-                flex-direction: row; /* Keep row, let items space */
+                flex-direction: row; 
             }
             .brand {
                 font-size: 1.4rem;
@@ -483,22 +505,25 @@
 </head>
 <body>
 
-    <!-- HERO SECTION -->
-    <header class="hero">
-        <div class="container">
-            <nav class="navbar">
-                <a href="#" class="brand">
-                    <img src="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg" alt="ShulTime Logo">
-                    ShulTime
-                </a>
-                
-                <!-- Stacked Support & Contact Buttons -->
-                <div class="nav-actions">
-                    <a href="#support" class="nav-btn nav-btn-solid">Support Us</a>
-                    <a href="#contact" class="nav-btn nav-btn-outline">Contact Us</a>
-                </div>
-            </nav>
+    <!-- STICKY HEADER -->
+    <header id="main-header">
+        <nav class="navbar">
+            <a href="#" class="brand">
+                <img src="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg" alt="ShulTime Logo">
+                ShulTime
+            </a>
+            
+            <!-- Stacked Support & Contact Buttons -->
+            <div class="nav-actions">
+                <a href="#support" class="nav-btn nav-btn-solid">Support Us</a>
+                <a href="#contact" class="nav-btn nav-btn-outline">Contact Us</a>
+            </div>
+        </nav>
+    </header>
 
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
             <div class="hero-content">
                 <!-- Left Side: Text & Buttons -->
                 <div class="hero-text">
@@ -531,7 +556,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- DETAILED FEATURE SHOWCASE (Replaces Carousel) -->
     <section class="features-section container">
@@ -654,6 +679,19 @@
             <p>&copy; 2026 ShulTime App. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- SCROLL SCRIPT FOR HEADER -->
+    <script>
+        const header = document.getElementById('main-header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
 
 </body>
 </html>
