@@ -3,54 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO & AIO: Primary Meta Tags -->
-    <title>ShulTime - Find a Minyan & Zmanim Instantly | Jewish Prayer App</title>
-    <meta name="description" content="Download ShulTime to find the nearest Minyan, check accurate Zmanim, and locate Shuls worldwide. The essential Jewish prayer app for iOS and Android.">
-    <meta name="keywords" content="ShulTime, Minyan finder, Zmanim, Shul locator, Jewish prayer app, Davening times, Ashkenaz, Sefard, Mincha, Maariv">
-    <meta name="author" content="ShulTime">
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph / Facebook / WhatsApp -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://shultime.com/">
-    <meta property="og:title" content="ShulTime - Find a Minyan Instantly">
-    <meta property="og:description" content="Never miss a Tefillah. Find nearby Shuls and accurate Zmanim on the go.">
-    <meta property="og:image" content="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://shultime.com/">
-    <meta property="twitter:title" content="ShulTime - Find a Minyan Instantly">
-    <meta property="twitter:description" content="Never miss a Tefillah. Find nearby Shuls and accurate Zmanim on the go.">
-    <meta property="twitter:image" content="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg">
-
+    <title>ShulTime - Find a Minyan & Zmanim Instantly</title>
     <!-- Logo in Browser Tab -->
     <link rel="icon" href="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg" type="image/jpeg">
-    <link rel="canonical" href="https://shultime.com/">
     
-    <!-- Structured Data for AI Overviews (SoftwareApplication Schema) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "ShulTime",
-      "operatingSystem": "iOS, Android",
-      "applicationCategory": "LifestyleApplication",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "1000"
-      },
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "description": "The most accurate Minyan finder for iOS and Android. Find a Shul, check the Zmanim, and never miss a tefillah again."
-    }
-    </script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         :root {
@@ -89,8 +45,8 @@
         }
 
         #main-header.scrolled {
-            background-color: rgba(15, 43, 70, 0.85); /* Translucent Navy */
-            backdrop-filter: blur(20px); /* iOS Blur Effect */
+            background-color: rgba(15, 43, 70, 0.85);
+            backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 0.8rem 0; 
@@ -100,7 +56,7 @@
         .navbar {
             display: flex;
             justify-content: space-between;
-            align-items: center; /* Center vertically */
+            align-items: center;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
@@ -129,7 +85,10 @@
             align-items: center;
         }
 
-        .nav-btn {
+        .nav-btn-solid {
+            background-color: var(--secondary-gold);
+            color: var(--primary-navy);
+            border: 1px solid var(--secondary-gold);
             padding: 8px 20px;
             border-radius: 20px;
             text-decoration: none;
@@ -139,12 +98,6 @@
             white-space: nowrap;
             text-align: center;
             min-width: 120px;
-        }
-
-        .nav-btn-solid {
-            background-color: var(--secondary-gold);
-            color: var(--primary-navy);
-            border: 1px solid var(--secondary-gold);
         }
 
         .nav-btn-solid:hover {
@@ -182,6 +135,32 @@
         .hero-text {
             max-width: 600px;
             z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center align for badge */
+        }
+
+        /* --- NEW DESIGN BADGE --- */
+        .design-badge {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--secondary-gold);
+            color: var(--secondary-gold);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .design-badge i {
+            font-size: 0.9em;
         }
 
         .hero-title {
@@ -548,7 +527,7 @@
             
             <!-- Only Support Us Button -->
             <div class="nav-actions">
-                <a href="#support" class="nav-btn nav-btn-solid">Support Us</a>
+                <a href="#support" class="nav-btn-solid">Support Us</a>
             </div>
         </nav>
     </header>
@@ -559,6 +538,11 @@
             <div class="hero-content">
                 <!-- Left Side: Text & Buttons -->
                 <div class="hero-text">
+                    <!-- NEW DESIGN STAMP -->
+                    <div class="design-badge">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> New Design Coming Soon
+                    </div>
+
                     <h1 class="hero-title">Davening. Zmanim. Minyanim.</h1>
                     <p class="hero-subtitle">The most accurate Minyan finder for iOS and Android. Find a Shul, check the Zmanim, and never miss a tefillah again.</p>
                     
@@ -578,11 +562,11 @@
                         <div class="phone-notch"></div>
                         <!-- Slideshow Container -->
                         <div class="phone-screen-slider">
-                            <img src="ShultimeMapImage2.jpeg" alt="Map View of nearby shuls">
-                            <img src="fc2fe398-c6a1-4ea2-b140-0c0bac6b23be.jpg" alt="Zmanim daily prayer times">
-                            <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%282%29.jpeg" alt="List View of minyanim">
-                            <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%281%29.jpeg" alt="Filtering options for prayer times">
-                            <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM.jpeg" alt="Favorites list of shuls">
+                            <img src="ShultimeMapImage2.jpeg" alt="Map View">
+                            <img src="fc2fe398-c6a1-4ea2-b140-0c0bac6b23be.jpg" alt="Zmanim View">
+                            <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%282%29.jpeg" alt="List View">
+                            <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%281%29.jpeg" alt="Filter View">
+                            <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM.jpeg" alt="Favorites View">
                         </div>
                     </div>
                 </div>
@@ -596,7 +580,7 @@
         <!-- Feature 1: Map -->
         <div class="feature-row">
             <div class="iphone-mini">
-                <img src="ShultimeMapImage2.jpeg" alt="Map Interface showing local shuls">
+                <img src="ShultimeMapImage2.jpeg" alt="Map Interface">
             </div>
             <div class="feature-text">
                 <h3 class="feature-title">Find Minyanim Nearby</h3>
@@ -607,7 +591,7 @@
         <!-- Feature 2: Zmanim -->
         <div class="feature-row">
             <div class="iphone-mini">
-                <img src="fc2fe398-c6a1-4ea2-b140-0c0bac6b23be.jpg" alt="Zmanim Interface showing prayer times">
+                <img src="fc2fe398-c6a1-4ea2-b140-0c0bac6b23be.jpg" alt="Zmanim Interface">
             </div>
             <div class="feature-text">
                 <h3 class="feature-title">Accurate Zmanim</h3>
@@ -618,7 +602,7 @@
         <!-- Feature 3: List View -->
         <div class="feature-row">
             <div class="iphone-mini">
-                <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%282%29.jpeg" alt="List View Interface of upcoming prayers">
+                <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%282%29.jpeg" alt="List View Interface">
             </div>
             <div class="feature-text">
                 <h3 class="feature-title">Clear Schedules</h3>
@@ -629,7 +613,7 @@
         <!-- Feature 4: Filters -->
         <div class="feature-row">
             <div class="iphone-mini">
-                <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%281%29.jpeg" alt="Filter Interface for Nusach and Time">
+                <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%281%29.jpeg" alt="Filter Interface">
             </div>
             <div class="feature-text">
                 <h3 class="feature-title">Smart Filtering</h3>
@@ -657,7 +641,7 @@
             <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">
                 We are a community-driven project dedicated to helping Jews everywhere connect with a minyan. Your support keeps our servers running and our data accurate.
             </p>
-            <!-- UPDATED BUTTON LINK & TEXT -->
+            <!-- UPDATED BUTTON TEXT -->
             <a href="https://pay.shultime.com/appsupport" class="btn-support" target="_blank">Support Now</a>
         </div>
     </section>
