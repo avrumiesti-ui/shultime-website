@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShulTime - Find a Minyan & Zmanim Instantly</title>
+    <title>ShulTime - Find a Minyan Instantly</title>
     <!-- Logo in Browser Tab -->
     <link rel="icon" href="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg" type="image/jpeg">
     
@@ -16,6 +16,7 @@
             --text-dark: #1a1a1a;
             --text-light: #ffffff;
             --gray-light: #e5e7eb;
+            --warning-yellow: #ffd700;
         }
 
         * {
@@ -45,8 +46,8 @@
         }
 
         #main-header.scrolled {
-            background-color: rgba(15, 43, 70, 0.85);
-            backdrop-filter: blur(20px);
+            background-color: rgba(15, 43, 70, 0.85); /* Translucent Navy */
+            backdrop-filter: blur(20px); /* iOS Blur Effect */
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             padding: 0.8rem 0; 
@@ -56,7 +57,7 @@
         .navbar {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: center; /* Center vertically */
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1.5rem;
@@ -137,30 +138,30 @@
             z-index: 2;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Center align for badge */
+            align-items: center;
         }
 
-        /* --- NEW DESIGN BADGE --- */
+        /* --- UPDATED: LARGER NEW DESIGN BADGE --- */
         .design-badge {
             background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--secondary-gold);
+            border: 2px solid var(--secondary-gold); /* Slightly thicker border */
             color: var(--secondary-gold);
-            padding: 6px 16px;
+            padding: 10px 24px; /* Increased padding */
             border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 700;
+            font-size: 1rem; /* Larger font */
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 1.5rem;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             backdrop-filter: blur(5px);
         }
 
         .design-badge i {
-            font-size: 0.9em;
+            font-size: 1.1em;
         }
 
         .hero-title {
@@ -177,14 +178,44 @@
             font-weight: 300;
         }
 
-        /* Download Badges */
+        /* --- UPDATED DOWNLOAD GROUP STYLES --- */
         .download-group {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
+            gap: 20px; /* Space between the two store sections */
             width: 100%;
             margin: 0 auto;
+        }
+
+        .store-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .status-pill {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Apple Warning Status */
+        .status-warning {
+            background-color: var(--warning-yellow);
+            color: #333;
+            border: 1px solid #e6c200;
+        }
+
+        /* Android Coming Soon Status */
+        .status-soon {
+            background-color: #4a5568;
+            color: #ccc;
+            border: 1px solid #555;
         }
 
         .badge-link {
@@ -199,6 +230,16 @@
         .badge-link img {
             height: 50px;
             width: auto;
+        }
+
+        /* Dim the Google Play button since it's not ready */
+        .btn-disabled {
+            opacity: 0.5;
+            filter: grayscale(100%);
+            cursor: not-allowed;
+        }
+        .btn-disabled:hover {
+            transform: none;
         }
 
         /* --- FORWARD FACING IPHONE (Hero) --- */
@@ -527,7 +568,7 @@
             
             <!-- Only Support Us Button -->
             <div class="nav-actions">
-                <a href="#support" class="nav-btn-solid">Support Us</a>
+                <a href="#support" class="nav-btn nav-btn-solid">Support Us</a>
             </div>
         </nav>
     </header>
@@ -547,12 +588,24 @@
                     <p class="hero-subtitle">The most accurate Minyan finder for iOS and Android. Find a Shul, check the Zmanim, and never miss a tefillah again.</p>
                     
                     <div class="download-group">
-                        <a href="https://apps.apple.com/us/app/shultime/id1242218047" class="badge-link" target="_blank">
-                            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1276560000" alt="Download on the App Store">
-                        </a>
-                        <a href="#" class="badge-link">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
-                        </a>
+                        
+                        <!-- Apple Store with Warning -->
+                        <div class="store-wrapper">
+                            <span class="status-pill status-warning">⚠️ Update In Progress - App Unstable</span>
+                            <a href="https://apps.apple.com/us/app/shultime/id1242218047" class="badge-link" target="_blank">
+                                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1276560000" alt="Download on the App Store">
+                            </a>
+                        </div>
+
+                        <!-- Google Play with Coming Soon -->
+                        <div class="store-wrapper">
+                            <span class="status-pill status-soon">Coming Soon</span>
+                            <!-- Added inactive class for visual effect -->
+                            <a href="#" class="badge-link btn-disabled" onclick="return false;">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
+                            </a>
+                        </div>
+
                     </div>
                 </div>
 
@@ -641,7 +694,7 @@
             <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">
                 We are a community-driven project dedicated to helping Jews everywhere connect with a minyan. Your support keeps our servers running and our data accurate.
             </p>
-            <!-- UPDATED BUTTON TEXT -->
+            <!-- UPDATED BUTTON LINK & TEXT -->
             <a href="https://pay.shultime.com/appsupport" class="btn-support" target="_blank">Support Now</a>
         </div>
     </section>
