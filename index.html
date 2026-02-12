@@ -3,9 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShulTime - Find a Minyan Instantly</title>
-    <!-- Logo in Browser Tab -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- --- SEO & METADATA --- -->
+    <title>ShulTime - Find a Minyan & Zmanim Instantly</title>
+    <meta name="description" content="The essential Jewish prayer app. Find the nearest Minyan, locate Shuls worldwide, and check accurate Halachic Zmanim. Download ShulTime for iOS & Android.">
+    <meta name="keywords" content="ShulTime, Minyan finder, Zmanim app, Jewish prayer times, Find a Minyan, Shacharis near me, Mincha, Maariv, Shul locator, Davening app">
+    <meta name="author" content="ShulTime">
+    <meta name="robots" content="index, follow">
+    
+    <!-- CANONICAL URL (Critical for SEO) -->
+    <link rel="canonical" href="https://shultime.com/">
+
+    <!-- --- SOCIAL MEDIA / OPEN GRAPH (WhatsApp, Facebook, LinkedIn) --- -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://shultime.com/">
+    <meta property="og:site_name" content="ShulTime">
+    <meta property="og:title" content="ShulTime - Find a Minyan Instantly">
+    <meta property="og:description" content="Never miss a Tefillah. Find nearby Shuls and accurate Zmanim on the go. Download the app today.">
+    <meta property="og:image" content="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg">
+    <meta property="og:image:alt" content="ShulTime App Logo">
+
+    <!-- --- TWITTER CARDS --- -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ShulTime - Find a Minyan Instantly">
+    <meta name="twitter:description" content="The most accurate Minyan finder and Zmanim app for the Jewish community.">
+    <meta name="twitter:image" content="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg">
+
+    <!-- --- FAVICONS --- -->
     <link rel="icon" href="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg" type="image/jpeg">
+    <link rel="apple-touch-icon" href="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg">
+
+    <!-- --- SCHEMA MARKUP (For Google AIO & Rich Snippets) --- -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "ShulTime",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "LifestyleApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "ShulTime is the most accurate Minyan finder for iOS and Android. Find a Shul, check the Zmanim, and never miss a tefillah again.",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "150"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "ShulTime"
+      },
+      "image": "https://shultime.com/WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg",
+      "featureList": "Find Minyanim, Real-time Zmanim, Shul Locator, Prayer Times"
+    }
+    </script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
@@ -42,7 +97,7 @@
             width: 100%;
             z-index: 1000;
             transition: all 0.3s ease;
-            padding: 0.8rem 0; /* Reduced padding slightly */
+            padding: 1rem 0;
         }
 
         #main-header.scrolled {
@@ -50,7 +105,7 @@
             backdrop-filter: blur(20px); /* iOS Blur Effect */
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.6rem 0; 
+            padding: 0.8rem 0; 
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         }
 
@@ -86,10 +141,7 @@
             align-items: center;
         }
 
-        .nav-btn-solid {
-            background-color: var(--secondary-gold);
-            color: var(--primary-navy);
-            border: 1px solid var(--secondary-gold);
+        .nav-btn {
             padding: 8px 20px;
             border-radius: 20px;
             text-decoration: none;
@@ -99,6 +151,12 @@
             white-space: nowrap;
             text-align: center;
             min-width: 120px;
+        }
+
+        .nav-btn-solid {
+            background-color: var(--secondary-gold);
+            color: var(--primary-navy);
+            border: 1px solid var(--secondary-gold);
         }
 
         .nav-btn-solid:hover {
@@ -112,10 +170,7 @@
             color: var(--text-light);
             position: relative;
             padding-bottom: 4rem;
-            
-            /* TIGHTENED PADDING for Mobile (Just enough to clear header) */
-            padding-top: 85px; 
-            
+            padding-top: 85px; /* TIGHTENED PADDING for Mobile */
             border-bottom-left-radius: 40px;
             border-bottom-right-radius: 40px;
             overflow: hidden;
@@ -132,7 +187,6 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            /* Removed top margin to pull content up */
             margin-top: 0; 
             gap: 2rem;
         }
@@ -156,7 +210,6 @@
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-            /* Reduced margin to pull title closer */
             margin-bottom: 1rem; 
             display: inline-flex;
             align-items: center;
@@ -379,7 +432,7 @@
         }
 
         /* --- SUPPORT SECTION --- */
-        /* Updated to 145px (195px - 50px) to move the section higher up the screen */
+        /* Updated to 145px */
         #support {
             scroll-margin-top: 145px; 
         }
@@ -503,9 +556,7 @@
 
         /* --- DESKTOP BREAKPOINT --- */
         @media (min-width: 992px) {
-            /* Tightened Desktop Padding */
             .hero {
-                /* Even less padding on desktop to pull content up */
                 padding-top: 100px; 
             }
 
@@ -513,17 +564,16 @@
                 flex-direction: row;
                 justify-content: space-between;
                 text-align: left;
-                /* Align items to TOP to reduce dead space */
                 align-items: flex-start; 
-                padding: 2rem 0; /* Minimal vertical padding */
-                height: auto; /* Remove forced 80vh height */
+                padding: 2rem 0; 
+                height: auto; 
                 min-height: 600px;
             }
 
             .hero-text {
                 align-items: flex-start;
                 max-width: 45%;
-                margin-top: 2rem; /* Slight nudge down so it's not touching nav */
+                margin-top: 2rem; 
             }
 
             .download-group {
@@ -535,7 +585,6 @@
             .phone-mockup-wrapper {
                 margin: 0;
                 transform: translateX(-50px);
-                /* Pull phone up slightly */
                 margin-top: 1rem; 
             }
 
@@ -600,7 +649,7 @@
 
                     <h1 class="hero-title">Davening. Zmanim. Minyanim.</h1>
                     
-                    <!-- UPDATED SUBTITLE WITH CTA -->
+                    <!-- SUBTITLE WITH CTA -->
                     <p class="hero-subtitle">
                         <strong>Download ShulTime Now.</strong> The most accurate Minyan finder for iOS and Android. Find a Shul, check the Zmanim, and never miss a tefillah again.
                     </p>
@@ -712,7 +761,7 @@
             <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">
                 We are a community-driven project dedicated to helping Jews everywhere connect with a minyan. Your support keeps our servers running and our data accurate.
             </p>
-            <!-- UPDATED BUTTON LINK & TEXT -->
+            <!-- UPDATED BUTTON TEXT -->
             <a href="https://pay.shultime.com/appsupport" class="btn-support" target="_blank">Support Now</a>
         </div>
     </section>
