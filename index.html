@@ -1,818 +1,817 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShulTime - Find a Minyan Instantly</title>
-    <!-- Logo in Browser Tab -->
-    <link rel="icon" href="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg" type="image/jpeg">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>ShulTime</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+    :root { --primary: #0D2B4F; --bg: #F2F4F8; }
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <style>
-        :root {
-            --primary-navy: #0f2b46;
-            --accent-cream: #f9f7f2;
-            --secondary-gold: #ffc107;
-            --text-dark: #1a1a1a;
-            --text-light: #ffffff;
-            --gray-light: #e5e7eb;
-            --warning-yellow: #ffd700;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--accent-cream);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- STICKY NAV HEADER (iOS Style) --- */
-        #main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            padding: 1rem 0;
-        }
-
-        #main-header.scrolled {
-            background-color: rgba(15, 43, 70, 0.85); /* Translucent Navy */
-            backdrop-filter: blur(20px); /* iOS Blur Effect */
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.8rem 0; 
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center; /* Center vertically */
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        .brand {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--accent-cream);
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-        }
-        
-        .brand img {
-            height: 50px;
-            border-radius: 8px;
-            border: 2px solid rgba(255,255,255,0.2);
-        }
-
-        /* Nav Buttons */
-        .nav-actions {
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-btn {
-            padding: 8px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            text-align: center;
-            min-width: 120px;
-        }
-
-        .nav-btn-solid {
-            background-color: var(--secondary-gold);
-            color: var(--primary-navy);
-            border: 1px solid var(--secondary-gold);
-        }
-
-        .nav-btn-solid:hover {
-            background-color: #e5ac00;
-            border-color: #e5ac00;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            background-color: var(--primary-navy);
-            color: var(--text-light);
-            position: relative;
-            padding-bottom: 4rem;
-            padding-top: 85px; 
-            border-bottom-left-radius: 40px;
-            border-bottom-right-radius: 40px;
-            overflow: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-top: 0; 
-            gap: 2rem;
-        }
-
-        .hero-text {
-            max-width: 600px;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* --- DESIGN BADGE --- */
-        .design-badge {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 2px solid var(--secondary-gold);
-            color: var(--secondary-gold);
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem; 
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            backdrop-filter: blur(5px);
-        }
-
-        .design-badge i {
-            font-size: 1.1em;
-        }
-
-        .hero-title {
-            font-size: 2.8rem;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            font-weight: 800;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        /* --- DOWNLOAD GROUP STYLES --- */
-        .download-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .store-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .status-pill {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 4px 10px;
-            border-radius: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        .status-warning {
-            background-color: var(--warning-yellow);
-            color: #333;
-            border: 1px solid #e6c200;
-        }
-
-        .status-soon {
-            background-color: #4a5568;
-            color: #ccc;
-            border: 1px solid #555;
-        }
-
-        .badge-link {
-            display: inline-block;
-            transition: transform 0.2s;
-        }
-
-        .badge-link:hover {
-            transform: translateY(-2px);
-        }
-
-        .badge-link img {
-            height: 50px;
-            width: auto;
-        }
-
-        .btn-disabled {
-            opacity: 0.5;
-            filter: grayscale(100%);
-            cursor: not-allowed;
-        }
-        .btn-disabled:hover {
-            transform: none;
-        }
-
-        /* --- FORWARD FACING IPHONE (Hero) --- */
-        .phone-mockup-wrapper {
-            position: relative;
-            width: 260px;
-            height: 545px; 
-            margin: 0 auto;
-            z-index: 1;
-        }
-
-        .phone-frame {
-            width: 100%;
-            height: 100%;
-            background: #111;
-            border-radius: 40px;
-            border: 8px solid #333;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-            position: relative;
-            transition: transform 0.5s ease;
-        }
-        
-        .phone-notch {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%;
-            height: 25px;
-            background: #111;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-            z-index: 10;
-        }
-
-        /* --- PHONE SLIDESHOW --- */
-        .phone-screen-slider {
-            width: 100%;
-            height: 100%;
-            position: relative;
-            background: black;
-        }
-
-        .phone-screen-slider img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding-top: 0; 
-            object-fit: cover; 
-            background: white;
-            opacity: 0;
-            animation: slideShow 20s infinite;
-        }
-
-        .phone-screen-slider img:nth-child(1) { animation-delay: 0s; }
-        .phone-screen-slider img:nth-child(2) { animation-delay: 4s; }
-        .phone-screen-slider img:nth-child(3) { animation-delay: 8s; }
-        .phone-screen-slider img:nth-child(4) { animation-delay: 12s; }
-        .phone-screen-slider img:nth-child(5) { animation-delay: 16s; }
-
-        @keyframes slideShow {
-            0% { opacity: 0; }
-            5% { opacity: 1; }  
-            20% { opacity: 1; } 
-            25% { opacity: 0; } 
-            100% { opacity: 0; }
-        }
-
-        /* --- FEATURE SHOWCASE (Vertical List) --- */
-        .features-section {
-            padding: 4rem 0;
-        }
-
-        .feature-row {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 6rem;
-        }
-
-        .feature-text {
-            text-align: center;
-            max-width: 500px;
-            padding: 0 1.5rem; 
-        }
-
-        .feature-title {
-            color: var(--primary-navy);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-weight: 800;
-        }
-
-        .feature-desc {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.7;
-        }
-
-        /* iPhone 12 Mini Style Frame for Features */
-        .iphone-mini {
-            width: 260px;
-            height: 540px;
-            background: #111;
-            border-radius: 35px;
-            border: 6px solid #222;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-
-        .iphone-mini img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: white;
-            padding-top: 0; 
-        }
-
-        .iphone-mini::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 45%;
-            height: 22px;
-            background: #111;
-            border-bottom-left-radius: 12px;
-            border-bottom-right-radius: 12px;
-        }
-
-        /* --- SUPPORT SECTION --- */
-        /* Updated to 145px based on previous request */
-        #support {
-            scroll-margin-top: 145px; 
-        }
-
-        .support-cta {
-            background: var(--primary-navy);
-            color: white;
-            padding: 4rem 1.5rem;
-            text-align: center;
-            margin-top: 2rem;
-            border-radius: 20px;
-            margin: 2rem 1.5rem 0 1.5rem;
-        }
-
-        .btn-support {
-            display: inline-block;
-            margin-top: 1.5rem;
-            background: var(--accent-cream);
-            color: var(--primary-navy);
-            padding: 15px 40px;
-            border-radius: 30px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .btn-support:hover {
-            opacity: 0.9;
-            transform: scale(1.05);
-        }
-
-        /* --- CONTACT FORM SECTION --- */
-        .contact-section {
-            background: white;
-            padding: 4rem 1.5rem;
-            margin-top: 2rem;
-            scroll-margin-top: 80px;
-        }
-        
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-
-        /* Grid for Email/Mobile */
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--primary-navy);
-            font-size: 0.9rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-navy);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .btn-submit {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: var(--primary-navy);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .btn-submit:hover {
-            background-color: #1a4266;
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            background: #0a1f33;
-            color: #8899a6;
-            padding: 3rem 1.5rem;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        footer a {
-            color: white;
-            text-decoration: none;
-        }
-
-        /* --- DESKTOP BREAKPOINT --- */
-        @media (min-width: 992px) {
-            .hero {
-                padding-top: 100px; 
-            }
-
-            .hero-content {
-                flex-direction: row;
-                justify-content: space-between;
-                text-align: left;
-                align-items: flex-start; 
-                padding: 2rem 0; 
-                height: auto; 
-                min-height: 600px;
-            }
-
-            .hero-text {
-                align-items: flex-start;
-                max-width: 45%;
-                margin-top: 2rem; 
-            }
-
-            .download-group {
-                flex-direction: row;
-                max-width: none;
-                justify-content: flex-start;
-            }
-
-            .phone-mockup-wrapper {
-                margin: 0;
-                transform: translateX(-50px);
-                margin-top: 1rem; 
-            }
-
-            /* Alternating Layout for Features */
-            .feature-row {
-                flex-direction: row;
-                justify-content: center;
-                gap: 4rem;
-            }
-            
-            .feature-row:nth-child(even) {
-                flex-direction: row-reverse;
-            }
-
-            .feature-text {
-                text-align: left;
-                width: 400px;
-            }
-        }
-
-        /* --- MOBILE BREAKPOINT --- */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: row; 
-            }
-            .brand {
-                font-size: 1.4rem;
-            }
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    html, body { margin: 0; padding: 0; height: 100%; overscroll-behavior-y: contain; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Roboto", sans-serif; background: var(--bg); overflow: hidden; }
+    
+    /* FLOATING HEADER */
+    .floating-header {
+        position: fixed; top: 15px; left: 12px; right: 12px;
+        z-index: 1000; display: flex; gap: 10px; align-items: center; pointer-events: auto;
+    }
+    .search-container {
+        flex: 1; pointer-events: auto; display: flex; align-items: center;
+        background: #fff; height: 50px; border-radius: 25px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15); padding: 0 15px;
+        overflow: hidden; 
+    }
+
+    /* GOOGLE COMPONENT */
+    gmp-place-autocomplete { 
+        width: 100%; height: 100%;
+        --gmp-filled-input-container-color: #fff !important;
+        background-color: #fff !important;
+    }
+    gmp-place-autocomplete::part(input) { 
+        background-color: #fff !important; padding: 0; font-size: 16px; 
+        height: 100%; width: 100%; color: #111 !important; font-weight: 500 !important;
+    }
+    /* Black Box Fixes */
+    .pac-container { background-color: #fff !important; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); border: none; }
+    .pac-item { background-color: #fff !important; color: #333 !important; }
+    .pac-item:hover { background-color: #f2f4f8 !important; }
+
+    .circle-btn {
+        width: 50px; height: 50px; flex-shrink: 0; pointer-events: auto;
+        border-radius: 50%; background: #fff; border: none;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center;
+        cursor: pointer; color: var(--primary); transition: all 0.2s;
+    }
+    .circle-btn.active { background: var(--primary); color: #fff; }
+
+    /* STATUS PILLS */
+    .status-area {
+        position: fixed; top: 75px; left: 0; right: 0;
+        display: flex; justify-content: center; align-items: center; gap: 8px;
+        z-index: 800; pointer-events: none; padding: 0 10px;
+    }
+    #status-pill, #count-pill, #map-radius-pill {
+        padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
+        display: none; box-shadow: 0 2px 8px rgba(0,0,0,0.1); white-space: nowrap;
+        max-width: 45%; overflow: hidden; text-overflow: ellipsis;
+    }
+    #status-pill { background: rgba(13, 43, 79, 0.95); color: #fff; }
+    #count-pill { background: #fff; color: var(--primary); border: 1px solid var(--primary); }
+    #map-radius-pill { background: #2E7D32; color: #fff; display: none; }
+
+    /* VIEWS */
+    #list-view { 
+        position: absolute; inset: 0; 
+        padding: 110px 12px 0px; 
+        overflow-y: auto; background: var(--bg); 
+        z-index: 10; padding-bottom: 100px;
+    }
+    #map-view { position: absolute; inset: 0; z-index: 5; }
+
+    #center-marker {
+        position: fixed; top: 50%; left: 50%; width: 16px; height: 16px;
+        background: #2196F3; border: 3px solid #fff; border-radius: 50%;
+        transform: translate(-50%, -50%); z-index: 20; box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+        pointer-events: none; display: none;
+    }
+
+    /* CARDS */
+    .minyan-card {
+        background: #fff; border-radius: 12px; margin-bottom: 8px;
+        display: flex; justify-content: space-between; align-items: stretch;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; 
+        min-height: 85px; 
+    }
+    .info-zone { 
+        flex: 1; padding: 10px 12px; cursor: pointer; 
+        display: flex; flex-direction: column; justify-content: space-between;
+        min-width: 0; 
+    }
+    .map-zone { 
+        width: 110px; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between;
+        border-left: 1px solid #f0f0f0; cursor: pointer; background: #fafafa; padding: 8px 10px;
+        flex-shrink: 0; text-align: right;
+    }
+    
+    .shul-name { font-weight: 800; font-size: 19px; color: #333; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .shul-address { font-size: 15px; color: #777; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+    
+    /* Top Align Title */
+    .tefillah-label { font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px;} 
+    /* Center Time */
+    .time-val { font-weight: 800; font-size: 20px; color: var(--primary); align-self: center; margin-right: -5px; }
+    /* Bottom Align Map */
+    .map-footer { display: flex; align-items: flex-end; gap: 6px; }
+    .dist-label { font-size: 12px; font-weight: 800; color: #666; line-height: 1; margin-bottom: 3px; }
+    
+    .map-circle { width: 30px; height: 30px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    .google-maps-icon { background: linear-gradient(135deg, #4285F4 25%, #34A853 25% 50%, #FBBC05 50% 75%, #EA4335 75%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 18px !important; font-weight: bold; }
+    
+    /* COLORS */
+    .nusach-tag { font-size: 11px; padding: 3px 9px; border-radius: 12px; display: inline-block; font-weight: 700; text-transform: uppercase; width: fit-content; }
+    .nusach-Ashkenaz { background: #E3F2FD; color: #1565C0; }
+    .nusach-Sefard { background: #E8F5E9; color: #2E7D32; }
+    .nusach-Ari { background: #F3E5F5; color: #7B1FA2; }
+    .nusach-Edot-HaMizrach { background: #FFF3E0; color: #E65100; }
+    .nusach-Chabad { background: #FFF8E1; color: #F57F17; }
+    .nusach-Other { background: #F5F5F5; color: #616161; }
+
+    .tef-Shacharis { color: #2E7D32; } .tef-Mincha { color: #E65100; } .tef-Maariv { color: #1565C0; }
+
+    /* FILTERS */
+    .chip { padding: 6px 12px; border-radius: 15px; border: 1px solid #ddd; background: #fff; font-size: 12px; font-weight: 600; color: #444; cursor: pointer; transition: all 0.1s; }
+    .chip.active { border-width: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transform: scale(1.05); }
+
+    .chip-Shacharis { background: #E8F5E9; color: #2E7D32; border-color: #C8E6C9; }
+    .chip-Mincha { background: #FFF3E0; color: #E65100; border-color: #FFE0B2; }
+    .chip-Maariv { background: #E3F2FD; color: #1565C0; border-color: #BBDEFB; }
+    
+    .chip-Ashkenaz { background: #E3F2FD; color: #1565C0; border-color: #BBDEFB; }
+    .chip-Sefard { background: #E8F5E9; color: #2E7D32; border-color: #C8E6C9; }
+    .chip-Ari { background: #F3E5F5; color: #7B1FA2; border-color: #E1BEE7; }
+    .chip-Edot-HaMizrach { background: #FFF3E0; color: #E65100; border-color: #FFE0B2; }
+    .chip-Chabad { background: #FFF8E1; color: #F57F17; border-color: #FFECB3; }
+
+    /* MARKERS */
+    .custom-marker { color: white; padding: 4px 9px; border-radius: 12px; font-size: 13px; font-weight: 800; box-shadow: 0 2px 6px rgba(0,0,0,0.3); border: 2px solid #fff; display: flex; align-items: center; justify-content: center; position: relative; top: 10px; cursor: pointer; transition: transform 0.1s; }
+    .marker-Ashkenaz { background: #1565C0; }
+    .marker-Sefard { background: #2E7D32; }
+    .marker-Ari { background: #7B1FA2; }
+    .marker-Edot-HaMizrach { background: #E65100; }
+    .marker-Chabad { background: #F57F17; }
+    .marker-Other { background: #616161; }
+    .custom-marker::after { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); border-width: 5px 5px 0; border-style: solid; border-color: inherit transparent transparent transparent; }
+
+    /* FILTER DRAWER */
+    #filter-drawer {
+        display: none; position: fixed; top: 80px; left: 12px; right: 12px;
+        background: #fff; border-radius: 20px; padding: 15px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.25); z-index: 2000;
+        max-width: 500px; margin: 0 auto;
+    }
+    .filter-section { margin-bottom: 12px; } 
+    .filter-label { font-size: 10px; font-weight: 800; color: #bbb; text-transform: uppercase; margin-bottom: 5px; display: block; }
+    .chip-group { display: flex; flex-wrap: wrap; gap: 6px; }
+    .radius-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .radius-row input[type=range] { flex: 1; accent-color: var(--primary); }
+    .radius-input { width: 50px; padding: 5px; border: 1px solid #ddd; border-radius: 8px; text-align: center; font-weight: bold; font-family: inherit; }
+    .time-inputs-row { display: flex; gap: 8px; }
+    .time-input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 15px; text-align: center; font-family: inherit; font-size: 12px; font-weight: 600; }
+    .action-btn { width: 100%; background: #eee; color: #333; border: none; padding: 10px; border-radius: 15px; font-size: 12px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .primary-action { background: var(--primary); color: white; }
+
+    /* DATE PICKER */
+    .date-selector { display: flex; align-items: center; justify-content: space-between; background: #f9f9f9; padding: 10px; border-radius: 12px; border: 1px solid #eee; margin-bottom: 15px; }
+    .date-btn { background: none; border: none; font-size: 18px; cursor: pointer; color: var(--primary); padding: 5px 15px; }
+    .date-display { font-weight: 700; font-size: 14px; color: #333; }
+
+    /* DETAILS DRAWER */
+    #details-drawer {
+        position: fixed; bottom: -100%; left: 10px; right: 10px; height: 75vh;
+        background: #fff; border-radius: 25px; 
+        z-index: 3000; margin-bottom: 15px;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.3); transition: transform 0.3s ease-out;
+        padding: 0; display: flex; flex-direction: column;
+    }
+    #details-drawer.open { bottom: 0; transform: translateY(0); }
+    
+    /* STICKY HEADER IN DRAWER */
+    .drawer-sticky-header {
+        position: sticky; top: 0; background: #fff; z-index: 10;
+        padding: 20px 20px 10px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        border-radius: 25px 25px 0 0;
+    }
+    .drawer-top-row { display: flex; justify-content: space-between; align-items: flex-start; }
+    .drawer-title-area { flex: 1; padding-right: 15px; }
+    .drawer-title { margin: 0; color: var(--primary); font-size: 22px; font-weight: 800; line-height: 1.1; }
+    .drawer-subtitle { font-size: 14px; color: #555; margin-top: 4px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .drawer-address { font-size: 13px; color: #888; margin-top: 4px; }
+    
+    .drawer-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .circle-action-btn { width: 36px; height: 36px; border-radius: 50%; background: #f0f0f0; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #555; transition: background 0.2s; }
+    .circle-action-btn:active { background: #e0e0e0; }
+
+    .drawer-body { flex: 1; overflow-y: auto; padding: 15px 20px 25px; }
+    
+    .schedule-section { margin-bottom: 20px; }
+    .schedule-title { font-weight:800; font-size:15px; margin-bottom:10px; color:#333; border-bottom:1px solid #eee; padding-bottom:5px; }
+    .schedule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 14px; }
+    .schedule-item { margin-bottom: 6px; }
+    .schedule-day { font-weight: 700; color: #666; font-size: 12px; text-transform: uppercase; }
+    
+    .contact-row { display: flex; gap: 10px; margin-bottom: 20px; }
+    .contact-btn { flex: 1; background: #f5f5f5; border: 1px solid #ddd; padding: 12px; border-radius: 12px; font-weight: 600; font-size: 14px; text-align: center; text-decoration: none; color: #333; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .contact-btn:active { background: #eee; }
+
+    #scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 2500; display: none; }
+
+    .fab-location {
+        position: fixed; bottom: 30px; right: 20px; width: 60px; height: 60px;
+        background: #fff; border-radius: 50%; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        border: none; color: var(--primary); display: flex; align-items: center; justify-content: center; z-index: 900;
+    }
+
+    .empty-state { text-align: center; color: #555; margin-top: 50px; padding: 0 30px; line-height: 1.6; }
+    .empty-state strong { color: var(--primary); font-size: 1.2em; }
+</style>
 </head>
 <body>
 
-    <!-- STICKY HEADER -->
-    <header id="main-header">
-        <nav class="navbar">
-            <a href="/" class="brand">
-                <img src="WhatsApp%20Image%202025-09-11%20at%202.50.13%20AM.jpeg" alt="ShulTime Logo">
-                ShulTime
-            </a>
-            
-            <!-- Only Support Us Button -->
-            <div class="nav-actions">
-                <a href="#support" class="nav-btn nav-btn-solid">Support Us</a>
-            </div>
-        </nav>
-    </header>
+    <div class="floating-header" onclick="scrollToTop(event)">
+        <div class="search-container" onclick="event.stopPropagation()">
+            <div id="autocomplete-container" style="flex:1; height:100%;"></div>
+        </div>
+        <button class="circle-btn" onclick="toggleFilters(); event.stopPropagation()">
+            <i class="material-icons">tune</i>
+        </button>
+        <button class="circle-btn" id="view-toggle-btn" onclick="toggleView(); event.stopPropagation()">
+            <i class="material-icons" id="view-icon">map</i>
+        </button>
+    </div>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <!-- Left Side: Text & Buttons -->
-                <div class="hero-text">
-                    <!-- NEW DESIGN STAMP -->
-                    <div class="design-badge">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> New Design Coming Soon
-                    </div>
+    <div class="status-area">
+        <div id="status-pill"></div>
+        <div id="count-pill"></div>
+        <div id="map-radius-pill"></div>
+    </div>
 
-                    <h1 class="hero-title">Davening. Zmanim. Minyanim.</h1>
-                    
-                    <!-- SUBTITLE WITH CTA -->
-                    <p class="hero-subtitle">
-                        <strong>Download ShulTime Now.</strong> The most accurate Minyan finder for iOS and Android. Find a Shul, check the Zmanim, and never miss a tefillah again.
-                    </p>
-                    
-                    <div class="download-group">
-                        
-                        <!-- Apple Store with Warning -->
-                        <div class="store-wrapper">
-                            <span class="status-pill status-warning">⚠️ Update In Progress - App Unstable</span>
-                            <a href="https://apps.apple.com/us/app/shultime/id1242218047" class="badge-link" target="_blank">
-                                <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&releaseDate=1276560000" alt="Download on the App Store">
-                            </a>
-                        </div>
+    <div id="center-marker"></div>
+    <div id="scrim" onclick="closeDetails()"></div>
 
-                        <!-- Google Play with Coming Soon -->
-                        <div class="store-wrapper">
-                            <span class="status-pill status-soon">Coming Soon</span>
-                            <!-- Added inactive class for visual effect -->
-                            <a href="#" class="badge-link btn-disabled" onclick="return false;">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play">
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Right Side: Forward Looking Phone Mockup -->
-                <div class="phone-mockup-wrapper">
-                    <div class="phone-frame">
-                        <div class="phone-notch"></div>
-                        <!-- Slideshow Container -->
-                        <div class="phone-screen-slider">
-                            <img src="ShultimeMapImage2.jpeg" alt="Map View">
-                            <img src="fc2fe398-c6a1-4ea2-b140-0c0bac6b23be.jpg" alt="Zmanim View">
-                            <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%282%29.jpeg" alt="List View">
-                            <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%281%29.jpeg" alt="Filter View">
-                            <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM.jpeg" alt="Favorites View">
-                        </div>
-                    </div>
+    <div id="details-drawer">
+        <div class="drawer-sticky-header">
+            <div class="drawer-top-row">
+                <div class="drawer-title-area" id="drawer-header-content"></div>
+                <div class="drawer-actions">
+                    <button class="circle-action-btn" onclick="shareShul()">
+                        <i class="material-icons" style="font-size:18px;">ios_share</i>
+                    </button>
+                    <button class="circle-action-btn" onclick="closeDetails()">
+                        <i class="material-icons" style="font-size:20px;">close</i>
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
+        <div id="drawer-content" class="drawer-body"></div>
+    </div>
 
-    <!-- DETAILED FEATURE SHOWCASE (Replaces Carousel) -->
-    <section class="features-section container">
+    <div id="filter-drawer">
+        <div class="filter-section">
+            <label class="filter-label">Date</label>
+            <div class="date-selector">
+                <button class="date-btn" onclick="changeDate(-1)"><i class="material-icons">chevron_left</i></button>
+                <div class="date-display" id="date-display">Today</div>
+                <button class="date-btn" onclick="changeDate(1)"><i class="material-icons">chevron_right</i></button>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <label class="filter-label">Radius (Miles)</label>
+            <div class="radius-row">
+                <input type="range" min="0.1" max="99" step="0.1" value="20" id="radius-slider" oninput="manualRadiusUpdate(this.value)">
+                <input type="number" id="radius-input" class="radius-input" value="20" onchange="manualRadiusUpdate(this.value)">
+            </div>
+            <div class="chip-group">
+                <div class="chip" onclick="manualRadiusUpdate(1)">1</div>
+                <div class="chip" onclick="manualRadiusUpdate(2)">2</div>
+                <div class="chip" onclick="manualRadiusUpdate(3)">3</div>
+                <div class="chip" onclick="manualRadiusUpdate(5)">5</div>
+                <div class="chip" onclick="manualRadiusUpdate(20)">20</div>
+                <div class="chip" onclick="manualRadiusUpdate(99)">99</div>
+            </div>
+        </div>
         
-        <!-- Feature 1: Map -->
-        <div class="feature-row">
-            <div class="iphone-mini">
-                <img src="ShultimeMapImage2.jpeg" alt="Map Interface">
-            </div>
-            <div class="feature-text">
-                <h3 class="feature-title">Find Minyanim Nearby</h3>
-                <p class="feature-desc">Visualize all nearby shuls and minyanim on an interactive map. See exactly where to go, whether you are close to home or traveling.</p>
-            </div>
-        </div>
-
-        <!-- Feature 2: Zmanim -->
-        <div class="feature-row">
-            <div class="iphone-mini">
-                <img src="fc2fe398-c6a1-4ea2-b140-0c0bac6b23be.jpg" alt="Zmanim Interface">
-            </div>
-            <div class="feature-text">
-                <h3 class="feature-title">Accurate Zmanim</h3>
-                <p class="feature-desc">Halachic times calculated precisely for your location. Never miss Zman Krias Shema or Tefillah again.</p>
+        <div class="filter-section">
+            <label class="filter-label">Tefillah</label>
+            <div class="chip-group">
+                <div class="chip active" onclick="setFilter('tefillah', '', this)">All</div>
+                <div class="chip chip-Shacharis" onclick="setFilter('tefillah', 'Shacharis', this)">Shacharis</div>
+                <div class="chip chip-Mincha" onclick="setFilter('tefillah', 'Mincha', this)">Mincha</div>
+                <div class="chip chip-Maariv" onclick="setFilter('tefillah', 'Maariv', this)">Maariv</div>
             </div>
         </div>
 
-        <!-- Feature 3: List View -->
-        <div class="feature-row">
-            <div class="iphone-mini">
-                <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%282%29.jpeg" alt="List View Interface">
-            </div>
-            <div class="feature-text">
-                <h3 class="feature-title">Clear Schedules</h3>
-                <p class="feature-desc">View an organized list of upcoming minyanim sorted by time. Easily see the next available Shacharis, Mincha, or Maariv.</p>
+        <div class="filter-section">
+            <label class="filter-label">Nusach</label>
+            <div class="chip-group" id="nusach-group">
+                <div class="chip active" onclick="setFilter('nusach', '', this)">All</div>
             </div>
         </div>
 
-        <!-- Feature 4: Filters -->
-        <div class="feature-row">
-            <div class="iphone-mini">
-                <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM%20%281%29.jpeg" alt="Filter Interface">
+        <div class="filter-section">
+            <label class="filter-label">Time Range</label>
+            <div class="time-inputs-row">
+                <input type="time" id="time-start" class="time-input" onchange="onStartTimeChange()">
+                <input type="time" id="time-end" class="time-input" onchange="applyFilters()">
             </div>
-            <div class="feature-text">
-                <h3 class="feature-title">Smart Filtering</h3>
-                <p class="feature-desc">Looking for a specific Nusach? Need a minyan right now? Use our advanced filters to find exactly what you need.</p>
-            </div>
-        </div>
-
-        <!-- Feature 5: Favorites -->
-        <div class="feature-row">
-            <div class="iphone-mini">
-                <img src="WhatsApp%20Image%202026-02-10%20at%2012.15.11%20PM.jpeg" alt="Favorites Interface">
-            </div>
-            <div class="feature-text">
-                <h3 class="feature-title">Your Local Favorites</h3>
-                <p class="feature-desc">Save your regular shuls to your Favorites list for one-tap access to their schedules and updates.</p>
+            <div style="display:flex; gap:6px;">
+                <button class="action-btn" onclick="setAllDay()">All Day</button>
+                <button class="action-btn primary-action" onclick="setNextHour()">Next Hour</button>
             </div>
         </div>
+        <button class="action-btn primary-action" onclick="toggleFilters()" style="margin-top:10px;">Done</button>
+    </div>
 
-    </section>
-
-    <!-- SUPPORT SECTION -->
-    <section class="container" id="support">
-        <div class="support-cta">
-            <h2 style="font-size: 2.2rem; margin-bottom: 1rem;">Support ShulTime</h2>
-            <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">
-                We are a community-driven project dedicated to helping Jews everywhere connect with a minyan. Your support keeps our servers running and our data accurate.
-            </p>
-            <!-- UPDATED BUTTON LINK & TEXT -->
-            <a href="https://pay.shultime.com/appsupport" class="btn-support" target="_blank">Support Now</a>
+    <div id="list-view">
+        <div class="empty-state">
+            <i class="material-icons" style="font-size:54px; margin-bottom:15px; color: var(--primary); opacity: 0.8;">explore</i><br>
+            <strong>Welcome to ShulTime</strong><br><br>
+            <b>1. Search</b> for a city or zip code.<br>
+            <b>2. Filter</b> by time or Nusach.<br>
+            <b>3. Tap</b> the target to use GPS.
         </div>
-    </section>
+    </div>
+    
+    <div id="map-view"></div>
+    
+    <button class="fab-location" onclick="useMyLocation()">
+        <i class="material-icons" style="font-size:30px;">my_location</i>
+    </button>
 
-    <!-- CONTACT FORM SECTION -->
-    <section class="contact-section" id="contact">
-        <div class="container" style="text-align:center;">
-            <h2 style="font-size: 2.2rem; margin-bottom: 1rem; color:var(--primary-navy);">Contact Us</h2>
-            <p style="margin-bottom: 2rem; opacity: 0.8;">Have a question? Found a bug? Need to add a Shul? Send us a message.</p>
-            
-            <div class="form-container">
-                <!-- IMPORTANT: Add name="submit-to-google-sheet" here for the JS to find it -->
-                <form name="submit-to-google-sheet">
-                    <div class="form-group">
-                        <label class="form-label">Full Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" name="email" class="form-control" placeholder="name@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Mobile Number</label>
-                            <input type="tel" name="mobile" class="form-control" placeholder="(555) 123-4567">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Subject</label>
-                        <input type="text" name="subject" class="form-control" placeholder="Correction, New Shul, Bug Report..." required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea name="message" class="form-control" placeholder="How can we help you?" required></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-submit">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <div style="margin-bottom: 1rem;">
-                <a href="#" style="margin: 0 10px;">Privacy Policy</a>
-                <a href="#" style="margin: 0 10px;">Terms of Service</a>
-            </div>
-            <p>&copy; 2026 ShulTime App. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- SCROLL SCRIPT FOR HEADER -->
     <script>
-        const header = document.getElementById('main-header');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+        // EMBEDDED DATABASE - COMPLETE
+        const RAW_DB = [{"id": 24, "name": "Ohab Zedek", "address": "118 W. 95th St. ", "city": "New York", "state": "NY", "zip": "10025", "lat": 40.792404, "lng": -73.968576, "nusach": "Ashkenaz", "rabbi": "Rabbi Allen Schwartz", "phone": "212-749-5150", "email": null, "website": "http://www.ozny.org/", "godaven_link": "https://www.godaven.com/shul-details/24", "shacharis": {"sun": ["08:00", "09:00"], "mon_thu": ["06:05", "06:50", "07:55"], "tue_wed_fri": ["06:15", "07:00", "08:00"], "rosh_chodesh": ["06:00", "06:45", "07:45"]}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Winter - Bizman,  Summer - Bizman and 7:00pm (from start of DST until approximately Rosh Hashana)", "maariv_txt": "Following Mincha.  Late Maarv is Tuesday at 10:00 pm"}, {"id": 27, "name": "Radio City Synagogue", "address": "30 W. 47th St.", "city": "New York", "state": "NY", "zip": "10036", "lat": 40.757217, "lng": -73.979682, "nusach": "Other", "rabbi": "Rabbi Shmuel Levitin", "phone": "212-819-0839", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/27", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:45", "17:15"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "(Daf Yomi at 1:00 PM)", "maariv_txt": "Follows late Mincha"}, {"id": 28, "name": "Congregation Beth Israel West Side Jewish Center", "address": "347 W. 34th St.", "city": "New York", "state": "NY", "zip": "10001", "lat": 40.752851, "lng": -73.994894, "nusach": "Other", "rabbi": "Rabbi Jason Herman", "phone": "212-502-5291", "email": "info@westsidejewishcenter.org", "website": "http://www.westsidejewishcenter.org", "godaven_link": "https://www.godaven.com/shul-details/28", "shacharis": {"sun": [], "mon_thu": ["06:45", "07:55"], "tue_wed_fri": ["06:50", "08:00"], "rosh_chodesh": ["06:30"]}, "mincha": {"week": ["13:40"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "maariv_txt": "Please check our website for accurate times."}, {"id": 30, "name": "Fifth Avenue Synagogue", "address": "5 E. 62nd St.", "city": "New York", "state": "NY", "zip": "10021", "lat": 40.766092, "lng": -73.971611, "nusach": "Ashkenaz", "rabbi": "Rabbi Yaakov Kermaier", "phone": "212-838-2122", "email": "info@5as.org", "website": "http://www.5as.org", "godaven_link": "https://www.godaven.com/shul-details/30", "shacharis": {"sun": ["08:30"], "mon_thu": ["07:30"], "tue_wed_fri": ["07:30"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": ["18:30"], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Just before Plag- call shul for exact time.", "maariv_txt": "follows Mincha"}, {"id": 34, "name": "Chinuch Atzmai - Torah Schools", "address": "40 Exchange Place", "city": "New York", "state": "NY", "zip": "10005", "lat": 40.705997, "lng": -74.009035, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-248-6200", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/34", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["12:45", "13:40"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 37, "name": "Wolfson Group", "address": "1 State Street Plaza", "city": "New York", "state": "NY", "zip": "10004", "lat": 40.702454, "lng": -74.01403, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-412-9101", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/37", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:35"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "M-Th"}, {"id": 38, "name": "Union of Orthodox Jewish Congregations of America", "address": "11 Broadway ", "city": "New York", "state": "NY", "zip": "10004", "lat": 40.705486, "lng": -74.013864, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-563-4000", "email": null, "website": "http://www.ou.org/", "godaven_link": "https://www.godaven.com/shul-details/38", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["15:00"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "on the 14th floor"}, {"id": 39, "name": "Downtown Beis Medrash", "address": "25 Broadway ", "city": "New York", "state": "NY", "zip": "10004", "lat": 40.705996, "lng": -74.013558, "nusach": "Ashkenaz", "rabbi": "Rabbi Not Listed", "phone": "212 - 438 - 3828", "email": "charles_baumann@sandp.com", "website": null, "godaven_link": "https://www.godaven.com/shul-details/39", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:40"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 42, "name": "Oppenheimer", "address": "120 Broad Street", "city": "New York", "state": "NY", "zip": "10006", "lat": 40.624557, "lng": -74.079378, "nusach": "Ashkenaz", "rabbi": "Rabbi Not Listed", "phone": "212-859-9239", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/42", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["14:00"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 43, "name": "GFI Mortgage Bankers", "address": "50 Broadway", "city": "New York", "state": "NY", "zip": "10004", "lat": 40.706338, "lng": -74.013285, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-837-4642", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/43", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["16:30"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "4:45 DST", "maariv_txt": "Call first"}, {"id": 44, "name": "FBE Ltd.", "address": "111 Broadway ", "city": "New York", "state": "NY", "zip": "10006", "lat": 40.709046, "lng": -74.010981, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-266-8262", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/44", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["14:00"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "1:00 PM on Friday"}, {"id": 47, "name": "World Center Beth Medrash", "address": "160 Broadway ", "city": "New York", "state": "NY", "zip": "10038", "lat": 40.710265, "lng": -74.009924, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "646-642-9767", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/47", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:45", "16:05"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "(also 12:45 PM in the winter)"}, {"id": 54, "name": "Eagle Paper, Inc.", "address": "121 Varick Street", "city": "New York", "state": "NY", "zip": "10013", "lat": 40.725473, "lng": -74.005773, "nusach": "Sefard", "rabbi": "Rabbi Not Listed", "phone": "212-604-9605", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/54", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:45"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Between Sukkot and Pesach: 1:05 PM"}, {"id": 58, "name": "Young Israel of Manhattan", "address": "317 Henry Street", "city": "New York", "state": "NY", "zip": "10002", "lat": 40.714857, "lng": -73.987177, "nusach": "Other", "rabbi": "Rabbi Yeshaya Siff", "phone": "212-732-0966", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/58", "shacharis": {"sun": ["07:00", "08:00"], "mon_thu": ["06:45", "07:35"], "tue_wed_fri": ["07:00", "07:35"], "rosh_chodesh": ["06:40", "07:30"]}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "10 minutes before Shkia", "maariv_txt": "35 minutes after Shkia"}, {"id": 59, "name": "Bialystoker Shul", "address": "7-11 Willett St.", "city": "New York", "state": "NY", "zip": "10002", "lat": 40.717712, "lng": -73.982221, "nusach": "Ashkenaz", "rabbi": "Rav Tzvi Dovid Romm", "phone": "212-475-0165", "email": "info@bialystoker.org", "website": "http://www.bialystoker.org/index.htm", "godaven_link": "https://www.godaven.com/shul-details/59", "shacharis": {"sun": ["09:15", "06:15", "07:00", "07:45", "08:30"], "mon_thu": ["06:00", "06:50", "07:45", "08:30"], "tue_wed_fri": ["06:15", "07:00", "07:45", "08:30"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "15 minutes before sunset", "maariv_txt": "30 minutes after sunset"}, {"id": 63, "name": "Cardozo Law School", "address": "55 5th Ave. ", "city": "New York", "state": "NY", "zip": "10003", "lat": 40.735443, "lng": -73.99443, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "(212) 790-0200", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/63", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["15:52"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "at room 425 during school year only."}, {"id": 64, "name": "Beth Israel Linsky Building", "address": "1st Ave. & 16th St. ", "city": "New York", "state": "NY", "zip": "10009", "lat": 40.732665, "lng": -73.9816, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-420-2759", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/64", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:30"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "M-Th"}, {"id": 70, "name": "Touro College", "address": "27 W. 23rd St. ", "city": "New York", "state": "NY", "zip": "10010", "lat": 40.742151, "lng": -73.990608, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-463-0400x5409", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/70", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:45"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "(Ashkenaz);  2:30 PM (Sefard)", "maariv_txt": "5:30 PM in Winter months"}, {"id": 71, "name": "Jay Imports", "address": "41 Madison Avenue", "city": "New York", "state": "NY", "zip": "10010", "lat": 40.743985, "lng": -73.988169, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-683-2727", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/71", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:00"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "1:45 PM DST"}, {"id": 75, "name": "Atlantic Jewelry", "address": "104 W. 29th St. ", "city": "New York", "state": "NY", "zip": "10001", "lat": 40.746965, "lng": -73.99035, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "(212) 695-2617", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/75", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:45"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 76, "name": "J. Levine Books & Judaica", "address": "5 W. 30th St.", "city": "New York", "state": "NY", "zip": "10001", "lat": 40.746328, "lng": -73.986769, "nusach": " ", "rabbi": "Rabbi Not Listed", "phone": "212-695-6888x824", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/76", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:40"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 79, "name": "Horizon Hosiery Mills", "address": "10 W. 33rd St.", "city": "New York", "state": "NY", "zip": "10001", "lat": 40.748117, "lng": -73.985417, "nusach": "Edot-HaMizrach", "rabbi": "Rabbi Not Listed", "phone": "212-239-8660", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/79", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["16:15"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "4:30 PM DST"}, {"id": 81, "name": "Khal Adath Jeshurun", "address": "85 Bennett Ave.", "city": "New York", "state": "NY", "zip": "10033", "lat": 40.853219, "lng": -73.935258, "nusach": "Ashkenaz", "rabbi": "Rav Z. Gelley & Rav Y. Mantel", "phone": "212-923-3582", "email": "kaj85@juno.com", "website": "http://www.kajinc.org/#http://www.kajinc.org/#", "godaven_link": "https://www.godaven.com/shul-details/81", "shacharis": {"sun": ["07:30"], "mon_thu": ["06:00", "07:00"], "tue_wed_fri": ["06:00", "07:00"], "rosh_chodesh": ["05:40", "06:45"]}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": ["20:00"], "shabbos": []}, "mincha_txt": "M-Th 1:15 PM (Oct. through the end of EST), 1:45 PM (Jul. & Aug.), around 1:30 otherwise. Also Sun-Thurs around 5 minutes after sunset Sep-Shavuos and around 15 minutes before sunset Shavuos-Aug", "maariv_txt": "mid-Oct until end of EST. Also around 45 minutes after sunset."}, {"id": 82, "name": "Beth Medrash Yeshurun", "address": "220 Bennett Ave.", "city": "New York", "state": "NY", "zip": "10040", "lat": 40.857196, "lng": -73.933267, "nusach": "Ashkenaz", "rabbi": "Roshei Hayeshiva Rabbi Meir Levi & Rabbi Yehosha Rubanowitz", "phone": "212-928-9981", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/82", "shacharis": {"sun": ["07:40"], "mon_thu": ["07:40"], "tue_wed_fri": ["07:40"], "rosh_chodesh": ["07:40"]}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Sunday 1:40 PM all year, Mon-Thurs Sep-June 1:40 PM; also 3:15 PM when Kollel or Beth Hamidrash is in session", "maariv_txt": "Last week in June until Rosh Chodesh Elul 9:30 PM;  Otherwise 9:50 PM"}, {"id": 83, "name": "Yeshiva University - Belfer Hall", "address": "2495 Amsterdam Avenue", "city": "New York", "state": "NY", "zip": "10033", "lat": 40.849953, "lng": -73.92946, "nusach": "Ashkenaz", "rabbi": "Rabbi Not Listed", "phone": "212-960-5392", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/83", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:50"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Nov-Feb: 10 minutes before sunset", "maariv_txt": "Nov-Feb: follows Mincha"}, {"id": 84, "name": "Yeshiva University - Furst Hall", "address": "500 W. 185th St. ", "city": "New York", "state": "NY", "zip": "10033", "lat": 40.850637, "lng": -73.928888, "nusach": "Ashkenaz", "rabbi": "Rabbi Not Listed", "phone": "212-960-5480", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/84", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["14:30"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 85, "name": "Yeshiva University - David Zysman Hall", "address": "2540 Amsterdam Ave.", "city": "New York", "state": "NY", "zip": "10033", "lat": 40.851344, "lng": -73.928319, "nusach": "Ashkenaz", "rabbi": "Rabbi Not Listed", "phone": "212-960-5480", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/85", "shacharis": {"sun": ["07:40"], "mon_thu": ["08:00"], "tue_wed_fri": ["08:15"], "rosh_chodesh": ["07:55"]}, "mincha": {"week": ["14:30"], "fri": [], "shabbos": []}, "maariv": {"week": ["22:00"], "shabbos": []}, "mincha_txt": "Sundays and summers: 1:30 PM", "maariv_txt": "Also 6:15 PM EST"}, {"id": 88, "name": "Park East Synagogue", "address": "164 E. 68th St.", "city": "New York", "state": "NY", "zip": "10021", "lat": 40.767853, "lng": -73.963927, "nusach": "Other", "rabbi": "Arthur Schneier", "phone": "212-737-6900", "email": null, "website": "http://www.parkeastsynagogue.org/", "godaven_link": "https://www.godaven.com/shul-details/88", "shacharis": {"sun": ["09:00"], "mon_thu": ["07:45"], "tue_wed_fri": ["07:45"], "rosh_chodesh": []}, "mincha": {"week": ["18:30"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "maariv_txt": "Follows Mincha"}, {"id": 89, "name": "Kehilath Jeshurun", "address": "125 E. 85th St.", "city": "New York", "state": "NY", "zip": "10028", "lat": 40.779106, "lng": -73.95681, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "(212) 774-5600", "email": null, "website": "http://www.ckj.org/#http://www.ckj.org/#", "godaven_link": "https://www.godaven.com/shul-details/89", "shacharis": {"sun": ["08:30"], "mon_thu": ["07:15"], "tue_wed_fri": ["07:30"], "rosh_chodesh": ["07:00"]}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Winter: B`Zman,   Summer: 6:45 PM", "maariv_txt": "Follows Mincha"}, {"id": 90, "name": "Orach Chaim", "address": "1459-1463 Lexington Ave.", "city": "New York", "state": "NY", "zip": "10028", "lat": 40.785185, "lng": -73.951515, "nusach": "Ashkenaz", "rabbi": "Dr. Michael D. Shmidman", "phone": "212-722-6566", "email": "OrachChaim@aol.com", "website": "http://www.orachchaim.org/#http://www.orachchaim.org/#", "godaven_link": "https://www.godaven.com/shul-details/90", "shacharis": {"sun": ["08:00"], "mon_thu": ["07:00"], "tue_wed_fri": ["07:00"], "rosh_chodesh": ["06:45"]}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Winter: Ten minutes before sunset; Summer: 7:30 PM", "maariv_txt": "Follows Mincha"}, {"id": 92, "name": "Congregation Ramath Orah", "address": "550 W. 110th St.", "city": "New York", "state": "NY", "zip": "10025", "lat": 40.803646, "lng": -73.965332, "nusach": "Ashkenaz", "rabbi": "Moshe Grussgott", "phone": "212-222-2470", "email": "info@ramathorah.org", "website": "http://www.ramathorah.org/", "godaven_link": "https://www.godaven.com/shul-details/92", "shacharis": {"sun": ["08:00"], "mon_thu": ["07:00"], "tue_wed_fri": ["07:00"], "rosh_chodesh": ["06:45"]}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Sundays - 15 minutes before sunset", "maariv_txt": "Sundays - Following Mincha"}, {"id": 94, "name": "Harlem Area Minyan", "address": "116 E. 125th St.", "city": "New York", "state": "NY", "zip": "10035", "lat": 40.804827, "lng": -73.938389, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-426-1284x118", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/94", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:10"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Mon-Thurs"}, {"id": 95, "name": "Columbia Presbyterian Medical Center", "address": "622 W. 168th St.", "city": "New York", "state": "NY", "zip": "10032", "lat": 40.841991, "lng": -73.941912, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-305-5817", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/95", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:40"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 100, "name": "East 50s Minyan / Citicorp Center Minyan", "address": "153 East 53rd Street", "city": "New York", "state": "NY", "zip": "10022", "lat": 40.758387, "lng": -73.970784, "nusach": "Ashkenaz", "rabbi": "Rabbi Not Listed", "phone": null, "email": "sfelsenthal@millburncorp.com", "website": null, "godaven_link": "https://www.godaven.com/shul-details/100", "shacharis": {"sun": ["08:00"], "mon_thu": ["06:30", "07:30"], "tue_wed_fri": ["06:30", "07:30"], "rosh_chodesh": []}, "mincha": {"week": ["13:45"], "fri": [], "shabbos": []}, "maariv": {"week": ["21:00"], "shabbos": []}, "mincha_txt": "DST: 1:40, 2:00, and 15 minutes before Plag. Rest of the year: 12:40, 1:40, 2:00 and 15 min. before shkia. On fast days, we have a sefer Torah. Minyan times vary on those days.", "maariv_txt": "16 minutes after late Mincha begins", "is_test_data": true}, {"id": 101, "name": "Weil, Gotshal & Manges, LLP", "address": "5th Avenue and 59th Street", "city": "New York", "state": "NY", "zip": "10009", "lat": 40.722737, "lng": -73.978301, "nusach": "Other", "rabbi": "Rabbi Philip Rosen", "phone": "212-310-8604", "email": "jprosen@aol.com", "website": null, "godaven_link": "https://www.godaven.com/shul-details/101", "shacharis": {"sun": ["08:00"], "mon_thu": ["06:30", "07:30"], "tue_wed_fri": ["06:30", "07:30"], "rosh_chodesh": []}, "mincha": {"week": ["13:45"], "fri": [], "shabbos": []}, "maariv": {"week": ["21:00"], "shabbos": []}, "mincha_txt": "7 minutes before sunset; plag mincha during summer", "maariv_txt": "Follows Mincha", "is_test_data": true}, {"id": 104, "name": "The Jewish Center", "address": "131 W. 86th St.", "city": "New York", "state": "NY", "zip": "10024", "lat": 40.786822, "lng": -73.973154, "nusach": "Ashkenaz", "rabbi": "Rabbi Yosie Levine", "phone": "212-724-2700", "email": "astrum@jewishcenter.org", "website": "www.jewishcenter.org#http://www.jewishcenter.org#", "godaven_link": "https://www.godaven.com/shul-details/104", "shacharis": {"sun": ["08:30"], "mon_thu": ["07:00", "08:00"], "tue_wed_fri": ["07:00", "08:00"], "rosh_chodesh": ["06:45", "08:00"]}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Shkiyyah", "maariv_txt": "S-Th: following shkiyah"}, {"id": 105, "name": "West Side Kollel", "address": "646 West End Ave", "city": "New York", "state": "NY", "zip": "10025", "lat": 40.792283, "lng": -73.975419, "nusach": "Ashkenaz", "rabbi": "R. Don Blumberg", "phone": "212-724-9848", "email": "wskollel@wskollel.com", "website": "http://www.wskollel.com/", "godaven_link": "https://www.godaven.com/shul-details/105", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["14:15"], "fri": [], "shabbos": []}, "maariv": {"week": ["21:00"], "shabbos": []}, "mincha_txt": "(Fast Days By Mincha Gedolah) (No Mincha Bein Hazmanim)"}, {"id": 106, "name": "Heichal Moshe", "address": "303 W. 91st St.", "city": "New York", "state": "NY", "zip": "10024", "lat": 40.792094, "lng": -73.975604, "nusach": "Sefard", "rabbi": "Rabbi Not Listed", "phone": "212-362-1091", "email": null, "website": "http://www.heichalmoshe.com/", "godaven_link": "https://www.godaven.com/shul-details/106", "shacharis": {"sun": ["07:00", "08:30", "09:30"], "mon_thu": ["06:40", "08:10", "09:15"], "tue_wed_fri": ["06:45", "08:10", "09:15"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "mincha_txt": "Approximately 10-15 minutes after sunset", "maariv_txt": "Approximately 45 minutes after sunset"}, {"id": 108, "name": "Frenkl, Hershkowitz & Shafran", "address": "49 west 37th street", "city": "New York", "state": "NY", "zip": "10016", "lat": 40.748395, "lng": -73.984113, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-679-4666", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/108", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["13:45"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 109, "name": "Malbridge Building Minyan", "address": "47 W. 34th St.", "city": "New York", "state": "NY", "zip": "10001", "lat": 40.749278, "lng": -73.986217, "nusach": "Edot-HaMizrach", "rabbi": "Rabbi Not Listed", "phone": "212-947-0607", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/109", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["16:00"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "maariv_txt": "Follows Mincha EST"}, {"id": 111, "name": "Finesheer", "address": "350 5th Ave.", "city": "New York", "state": "NY", "zip": "10118", "lat": 40.748647, "lng": -73.984726, "nusach": "Other", "rabbi": "Rabbi Not Listed", "phone": "212-594-4224", "email": null, "website": null, "godaven_link": "https://www.godaven.com/shul-details/111", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["16:15"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}, "maariv_txt": "Follows Mincha in the winter"}, {"id": 1001, "name": "Beth Medrash Govoha (BMG)", "address": "617 6th St", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0935, "lng": -74.2158, "nusach": "Ashkenaz", "shacharis": {"sun": ["07:40", "08:45"], "mon_thu": ["07:40", "08:45"], "tue_wed_fri": ["07:40", "08:45"], "rosh_chodesh": ["07:30", "08:30"]}, "mincha": {"week": ["13:45", "15:25"], "fri": [], "shabbos": []}, "maariv": {"week": ["22:00", "23:00"], "shabbos": []}}, {"id": 1002, "name": "Kol Shimshon", "address": "323 Squankum Rd", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.1023, "lng": -74.2012, "nusach": "Ashkenaz", "shacharis": {"sun": ["07:00", "08:00"], "mon_thu": ["06:45", "08:00"], "tue_wed_fri": ["06:45", "08:00"], "rosh_chodesh": []}, "mincha": {"week": ["12:20", "12:40", "13:00", "13:20", "13:40"], "fri": [], "shabbos": []}, "maariv": {"week": ["18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30"], "shabbos": []}, "mincha_txt": "Every 20 mins from 12:20 PM"}, {"id": 1003, "name": "Khal Ytev Lev (Satmar)", "address": "405 Forest Ave", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0898, "lng": -74.2165, "nusach": "Sefard", "shacharis": {"sun": ["07:30", "08:30", "09:30"], "mon_thu": ["07:00", "08:00", "09:00"], "tue_wed_fri": ["07:00", "08:00", "09:00"], "rosh_chodesh": []}, "mincha": {"week": ["14:00"], "fri": [], "shabbos": []}, "maariv": {"week": ["20:00", "21:00"], "shabbos": []}, "mincha_txt": "Continuous minyanim"}, {"id": 1004, "name": "Bais Medrash Lutzk", "address": "520 New Egypt Rd", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0839, "lng": -74.2546, "nusach": "Ashkenaz", "shacharis": {"sun": ["08:00", "09:00"], "mon_thu": ["06:30", "08:00"], "tue_wed_fri": ["06:30", "08:00"], "rosh_chodesh": []}, "mincha": {"week": ["13:45", "17:30"], "fri": [], "shabbos": []}, "maariv": {"week": ["21:00", "22:00"], "shabbos": []}}, {"id": 1005, "name": "Chestnut Shul", "address": "105 Chestnut St", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0526, "lng": -74.2161, "nusach": "Sefard", "shacharis": {"sun": ["07:00", "08:00", "09:00"], "mon_thu": ["06:30", "07:30"], "tue_wed_fri": ["06:30", "07:30"], "rosh_chodesh": []}, "mincha": {"week": ["13:45", "17:09"], "fri": [], "shabbos": []}, "maariv": {"week": ["19:00", "20:45", "22:00"], "shabbos": []}}, {"id": 1006, "name": "Pine River Village Shul", "address": "38 Goldcrest Dr", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0585, "lng": -74.2312, "nusach": "Ashkenaz", "shacharis": {"sun": ["07:30", "08:30"], "mon_thu": ["07:00", "08:00"], "tue_wed_fri": ["07:00", "08:00"], "rosh_chodesh": []}, "mincha": {"week": ["13:40"], "fri": [], "shabbos": []}, "maariv": {"week": ["20:15", "21:00"], "shabbos": []}}, {"id": 1007, "name": "Bais Medrash Kol Aryeh", "address": "521 Hope Chapel Rd", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.1152, "lng": -74.2385, "nusach": "Sefard", "shacharis": {"sun": ["06:00", "06:50", "07:50", "08:50"], "mon_thu": ["06:00", "06:50"], "tue_wed_fri": ["06:00", "06:50"], "rosh_chodesh": []}, "mincha": {"week": ["13:30", "16:20"], "fri": [], "shabbos": []}, "maariv": {"week": ["18:15", "19:00", "20:30", "22:05", "23:00"], "shabbos": []}}, {"id": 1008, "name": "K'hal Ateres Yeshaya", "address": "908 E County Line Rd", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0955, "lng": -74.1952, "nusach": "Ashkenaz", "shacharis": {"sun": ["07:10", "08:00", "09:45"], "mon_thu": ["06:05", "07:10"], "tue_wed_fri": ["06:10", "07:10"], "rosh_chodesh": []}, "mincha": {"week": ["17:00"], "fri": [], "shabbos": []}, "maariv": {"week": ["20:10", "21:45"], "shabbos": []}}, {"id": 1009, "name": "Lakewood Commons Shul", "address": "44 Coles Way", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0385, "lng": -74.2255, "nusach": "Ashkenaz", "shacharis": {"sun": ["07:20", "07:35", "07:40", "08:00", "08:20"], "mon_thu": ["07:20", "08:00"], "tue_wed_fri": ["07:20", "08:00"], "rosh_chodesh": []}, "mincha": {"week": ["13:15", "13:50"], "fri": [], "shabbos": []}, "maariv": {"week": ["21:30", "22:00", "22:20"], "shabbos": []}}, {"id": 1010, "name": "Ezrat Torah / Lakewood Outreach", "address": "401 Madison Ave", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0932, "lng": -74.2125, "nusach": "Edot-HaMizrach", "shacharis": {"sun": ["08:00"], "mon_thu": ["07:00"], "tue_wed_fri": ["07:00"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": ["22:00"], "shabbos": []}}, {"id": 1011, "name": "Kehilat Etz Hayim", "address": "21 Cedar St", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0895, "lng": -74.2185, "nusach": "Edot-HaMizrach", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": ["16:55"], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1012, "name": "Khal Bnei Torah", "address": "304 Monmouth Ave", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0945, "lng": -74.2135, "nusach": "Edot-HaMizrach", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": ["21:45"], "shabbos": []}}, {"id": 1013, "name": "Kollel Ezrat Torah", "address": "517 Forest Ave", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0915, "lng": -74.2195, "nusach": "Edot-HaMizrach", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": ["22:00"], "shabbos": []}}, {"id": 1014, "name": "Shaarey Ezra", "address": "13 Ponderosa Dr", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0755, "lng": -74.2255, "nusach": "Edot-HaMizrach", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1015, "name": "Sunset Road Sephardic Cong", "address": "220 Sunset Rd", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0815, "lng": -74.2285, "nusach": "Edot-HaMizrach", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": ["22:05"], "shabbos": []}}, {"id": 1016, "name": "Lakewood Sephardic Cong", "address": "613 Madison Ave", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0965, "lng": -74.2145, "nusach": "Edot-HaMizrach", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1017, "name": "Minyan Avrechim Sefaradi", "address": "500 Marc Dr", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0785, "lng": -74.2305, "nusach": "Edot-HaMizrach", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": ["21:20"], "shabbos": []}}, {"id": 1018, "name": "Cong Zichron Binyamin", "address": "701 Princeton Ave", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0995, "lng": -74.2085, "nusach": "Edot-HaMizrach", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": ["21:35"], "shabbos": []}}, {"id": 1019, "name": "Congregation Ohel Shulamit", "address": "38 Spruce St", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0855, "lng": -74.2355, "nusach": "Edot-HaMizrach", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": ["19:00"], "shabbos": []}}, {"id": 1020, "name": "Khal Tiferes Tzvi", "address": "80 Bradhurst Ave", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0985, "lng": -74.2255, "nusach": "Sefard", "shacharis": {"sun": ["06:00"], "mon_thu": ["06:00"], "tue_wed_fri": ["06:00"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1021, "name": "Khal Zichron Yaakov", "address": "175 Sunset Rd", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0825, "lng": -74.2265, "nusach": "Ashkenaz", "shacharis": {"sun": ["06:10"], "mon_thu": ["06:10"], "tue_wed_fri": ["06:10"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1022, "name": "Sharei Tefilah", "address": "1176 Coughlin St", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0705, "lng": -74.2385, "nusach": "Sefard", "shacharis": {"sun": ["06:10"], "mon_thu": ["06:10"], "tue_wed_fri": ["06:10"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1023, "name": "Madison Title Minyan", "address": "1125 Ocean Ave", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0885, "lng": -74.2055, "nusach": "Sefard", "shacharis": {"sun": ["06:10"], "mon_thu": ["06:10"], "tue_wed_fri": ["06:10"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1024, "name": "Shemen Lmincha", "address": "2 Milano Dr", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0655, "lng": -74.2405, "nusach": "Sefard", "shacharis": {"sun": ["06:15"], "mon_thu": ["06:15"], "tue_wed_fri": ["06:15"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1025, "name": "Kahal Rizhin", "address": "1132 E County Line Rd", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0965, "lng": -74.1925, "nusach": "Sefard", "shacharis": {"sun": ["06:15"], "mon_thu": ["06:15"], "tue_wed_fri": ["06:15"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1026, "name": "Khal M'kadshai Hashem", "address": "2461 Whitesville Rd", "city": "Toms River", "state": "NJ", "zip": "08755", "lat": 40.0555, "lng": -74.2455, "nusach": "Sefard", "shacharis": {"sun": ["06:15"], "mon_thu": ["06:15"], "tue_wed_fri": ["06:15"], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1027, "name": "Bais Halevy", "address": "705 Valley Dr", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0855, "lng": -74.2255, "nusach": "Ashkenaz", "shacharis": {"sun": ["07:30", "08:15"], "mon_thu": ["07:30"], "tue_wed_fri": ["07:30"], "rosh_chodesh": []}, "mincha": {"week": ["13:40"], "fri": [], "shabbos": []}, "maariv": {"week": ["21:45"], "shabbos": []}}, {"id": 1028, "name": "Shefa Chaim Sanz", "address": "112 Chestnut St", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0515, "lng": -74.2155, "nusach": "Sefard", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1029, "name": "Gur Lakewood", "address": "325 10th St", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0955, "lng": -74.2105, "nusach": "Sefard", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1030, "name": "Beth Am Shalom", "address": "1235 Route 70 West", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0655, "lng": -74.2055, "nusach": "Other", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1031, "name": "Chabad of Jackson", "address": "645 Cross St", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0555, "lng": -74.2555, "nusach": "Ari", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1032, "name": "Chabad of Toms River", "address": "2001 Church Rd", "city": "Toms River", "state": "NJ", "zip": "08753", "lat": 39.9955, "lng": -74.1855, "nusach": "Ari", "shacharis": {"sun": [], "mon_thu": [], "tue_wed_fri": [], "rosh_chodesh": []}, "mincha": {"week": [], "fri": [], "shabbos": []}, "maariv": {"week": [], "shabbos": []}}, {"id": 1033, "name": "Congregation Sons of Israel", "address": "590 Madison Ave", "city": "Lakewood", "state": "NJ", "zip": "08701", "lat": 40.0955, "lng": -74.2125, "nusach": "Ashkenaz", "shacharis": {"sun": ["08:00", "08:15", "08:30"], "mon_thu": ["07:00", "07:50"], "tue_wed_fri": ["07:00", "07:50"], "rosh_chodesh": []}, "mincha": {"week": ["13:35", "16:52"], "fri": [], "shabbos": []}, "maariv": {"week": ["21:30", "22:00"], "shabbos": []}}];
+        // EMBEDDED DATABASE END
+
+        let map, allMinyanim = [], processedMinyanim = [], searchCenter = null, currentRadius = 20;
+        let filters = { sort: 'time_asc', tefillah: '', nusach: '' };
+        let selectedShul = null;
+        let markers = [];
+        let isProgrammaticMove = false;
+        let allNusachs = new Set();
+        let currentDate = new Date(); // Current date state
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            document.getElementById('time-start').value = "00:00";
+            document.getElementById('time-end').value = "23:59";
+            
+            updateDateUI();
+            processMinyanim(RAW_DB);
+            populateNusachFilter();
+            initPullToDismiss();
         });
-    </script>
 
-    <!-- GOOGLE SHEETS SUBMISSION SCRIPT -->
-    <script>
-        // PASTE YOUR GOOGLE SHEET WEB APP URL HERE
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxaX5tq2bLW7uCjb-9Eib0qyBnSeNqMWrJZpKPkrcwB0TmSTRQTlDrpZ-nmKPq243gm5Q/exec'
-        const form = document.forms['submit-to-google-sheet']
-        const btn = document.querySelector('.btn-submit')
+        // DATE LOGIC
+        function updateDateUI() {
+            const options = { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' };
+            document.getElementById("date-display").innerText = currentDate.toLocaleDateString('en-US', options);
+        }
 
-        form.addEventListener('submit', e => {
-            e.preventDefault()
+        function changeDate(days) {
+            currentDate.setDate(currentDate.getDate() + days);
+            updateDateUI();
+            processMinyanim(RAW_DB); // Reprocess based on new day
+            applyFilters();
+        }
+
+        function getTodayKey() {
+            const d = currentDate.getDay(); 
+            if (d === 0) return 'sun';
+            if (d === 1 || d === 4) return 'mon_thu';
+            return 'tue_wed_fri';
+        }
+
+        function formatTimeShort(tStr) {
+            if(!tStr) return "";
+            let [h,m] = tStr.split(":").map(Number);
+            let suffix = h >= 12 ? "p" : "a";
+            let h12 = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+            let mStr = String(m).padStart(2,"0");
+            return `${h12}:${mStr}${suffix}`;
+        }
+
+        function scrollToTop(e) {
+            if(e) e.stopPropagation();
+            document.getElementById('list-view').scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function processMinyanim(data){
+            processedMinyanim = [];
+            allNusachs = new Set();
+            const todayKey = getTodayKey();
+
+            data.forEach(shul => {
+                if(!shul.name) return; // Skip nameless
+                if(shul.nusach) allNusachs.add(shul.nusach.trim());
+
+                let hasTimes = false;
+                
+                // For simplicity in this combined file, we treat weekday keys same
+                if (shul.shacharis && shul.shacharis[todayKey]) {
+                    shul.shacharis[todayKey].forEach(t => { addMinyan(shul, 'Shacharis', t); hasTimes = true; });
+                }
+                if (shul.mincha && shul.mincha.week) {
+                    shul.mincha.week.forEach(t => { addMinyan(shul, 'Mincha', t); hasTimes = true; });
+                }
+                if (shul.maariv && shul.maariv.week) {
+                    shul.maariv.week.forEach(t => { addMinyan(shul, 'Maariv', t); hasTimes = true; });
+                }
+
+                if (!hasTimes) {
+                    processedMinyanim.push({
+                        ...shul, tefillah: 'Info', timeDisplay: '--:--', ampm: '', timeValue: 9999
+                    });
+                }
+            });
+            allMinyanim = processedMinyanim;
+        }
+
+        function addMinyan(shul, type, tStr) {
+            if(!tStr) return;
+            let raw = tStr.trim().replace(/[^0-9:]/g,"");
+            if(!raw) return;
+            let [h,m] = raw.split(":").map(Number);
+            let sortH = h; 
+            // Mincha logic for sorting
+            if (type === "Mincha" && h < 9) sortH += 12;
             
-            // Show loading state
-            btn.innerHTML = 'Sending...'
-            btn.disabled = true
+            // Format 7:00a
+            let formatted = formatTimeShort(raw);
+            
+            processedMinyanim.push({
+                ...shul, tefillah: type, timeDisplay: formatted, timeValue: (sortH * 60) + m
+            });
+        }
 
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(response => {
-                // Show success state
-                btn.innerHTML = 'Message Sent!'
-                btn.style.backgroundColor = '#4CAF50'; // Green for success
+        function populateNusachFilter() {
+            const group = document.getElementById("nusach-group");
+            group.innerHTML = `<div class="chip active" onclick="setFilter('nusach', '', this)">All</div>`;
+            Array.from(allNusachs).sort().forEach(n => {
+                if(!n) return;
+                const safeClass = `chip-${n.replace(/\s+/g, '-')}`;
+                const chip = document.createElement("div");
+                chip.className = `chip ${safeClass}`;
+                chip.innerText = n;
+                chip.onclick = function() { setFilter('nusach', n, this); };
+                group.appendChild(chip);
+            });
+        }
+
+        function toggleView() {
+            document.getElementById('filter-drawer').style.display = 'none'; // Auto close
+
+            const list = document.getElementById("list-view");
+            const btn = document.getElementById("view-toggle-btn");
+            const icon = document.getElementById("view-icon");
+            const dot = document.getElementById("center-marker");
+            const mapPill = document.getElementById("map-radius-pill");
+            
+            if (list.style.display === "none") {
+                list.style.display = "block";
+                icon.innerText = "map";
+                btn.classList.remove("active");
+                dot.style.display = "none";
+                mapPill.style.display = "none";
+            } else {
+                list.style.display = "none";
+                icon.innerText = "list";
+                btn.classList.add("active");
+                dot.style.display = "block";
+                mapPill.style.display = "block";
                 
-                // Reset form
-                form.reset()
+                if(map && searchCenter && map.getZoom() === 12 && !markers.length) {
+                    isProgrammaticMove = true;
+                    map.panTo(searchCenter);
+                }
+            }
+        }
+
+        function setSearchLocation(lat, lng, name){
+            searchCenter = { lat, lng };
+            document.getElementById("status-pill").style.display = "block";
+            document.getElementById("status-pill").innerText = `Near: ${name}`;
+            
+            if(map) {
+                isProgrammaticMove = true;
+                map.setCenter({ lat, lng });
+                map.setZoom(13);
+            }
+            applyFilters();
+        }
+
+        function manualRadiusUpdate(val) {
+            updateRadius(val);
+            applyFilters();
+        }
+
+        function updateRadius(val) {
+            currentRadius = parseFloat(val);
+            document.getElementById("radius-input").value = currentRadius;
+            document.getElementById("radius-slider").value = currentRadius;
+        }
+
+        function fitMapToRadius(miles) {
+            if(!map || !searchCenter) return;
+            const circle = new google.maps.Circle({
+                center: searchCenter,
+                radius: miles * 1609.34,
+                strokeOpacity: 0, fillOpacity: 0, map: map
+            });
+            map.fitBounds(circle.getBounds());
+            circle.setMap(null); 
+        }
+
+        function applyFilters(){
+            if(!searchCenter || !allMinyanim.length) return;
+            const [sH, sM] = document.getElementById('time-start').value.split(':').map(Number);
+            const [eH, eM] = document.getElementById('time-end').value.split(':').map(Number);
+            const startVal = (sH*60)+sM, endVal = (eH*60)+eM;
+
+            let results = allMinyanim.map(m => {
+                m.distance = getDistance(searchCenter.lat, searchCenter.lng, m.lat, m.lng);
+                return m;
+            }).filter(m => m.distance <= currentRadius);
+
+            if(filters.tefillah) results = results.filter(m => m.tefillah === filters.tefillah);
+            if(filters.nusach) results = results.filter(m => m.nusach === filters.nusach);
+            
+            results = results.filter(m => {
+                if (m.timeValue === 9999) return true; 
+                return m.timeValue >= startVal && m.timeValue <= endVal;
+            });
+
+            if(filters.sort === 'distance') results.sort((a,b) => a.distance - b.distance);
+            else results.sort((a,b) => a.timeValue - b.timeValue);
+            
+            const uniqueShuls = new Set(results.map(r => r.name + r.address)).size;
+            const countPill = document.getElementById("count-pill");
+            countPill.style.display = "block";
+            countPill.innerText = `${uniqueShuls} Shuls / ${results.length} Minyanim`;
+
+            renderList(results);
+            updateMapMarkers(results);
+        }
+
+        function renderList(results){
+            const list = document.getElementById("list-view");
+            list.innerHTML = results.length ? "" : '<div class="empty-state">No minyanim found matching your filters.</div>';
+            results.forEach(m => {
+                let nCls = `nusach-${(m.nusach || 'Other').replace(/\s+/g, '-')}`;
+                const godavenId = m.godaven_link ? m.godaven_link.split('/').pop() : m.id;
+                const link = `https://www.godaven.com/shul-details/${godavenId}`;
                 
-                // Reset button after 3 seconds
-                setTimeout(() => {
-                    btn.innerHTML = 'Send Message'
-                    btn.style.backgroundColor = ''; // Revert color
-                    btn.disabled = false
-                }, 3000)
-            })
-            .catch(error => {
-                console.error('Error!', error.message)
-                btn.innerHTML = 'Error! Try Again'
-                btn.disabled = false
-            })
-        })
+                const card = document.createElement("div");
+                card.className = "minyan-card";
+                
+                let rightSide = '';
+                if(m.timeValue === 9999) {
+                    rightSide = `<div class="map-zone" onclick="window.open('${link}','_blank')">
+                        <div class="map-footer">
+                            <div class="dist-label">${m.distance.toFixed(1)}mi</div>
+                            <div class="map-circle"><i class="material-icons google-maps-icon">place</i></div>
+                        </div>
+                    </div>`;
+                } else {
+                    rightSide = `<div class="map-zone" onclick="window.open('${link}','_blank')">
+                        <div class="tefillah-label tef-${m.tefillah}">${m.tefillah}</div>
+                        <div class="time-val">${m.timeDisplay}</div>
+                        <div class="map-footer">
+                            <div class="dist-label">${m.distance.toFixed(1)}mi</div>
+                            <div class="map-circle"><i class="material-icons google-maps-icon">place</i></div>
+                        </div>
+                    </div>`;
+                }
+
+                card.innerHTML = `
+                    <div class="info-zone" onclick='openDetails(${JSON.stringify(m).replace(/'/g, "'")})'>
+                        <div class="shul-name">${m.name}</div>
+                        <div class="shul-address">${m.address}</div>
+                        <div class="nusach-tag ${nCls}">${m.nusach}</div>
+                    </div>
+                    ${rightSide}`;
+                list.appendChild(card);
+            });
+        }
+
+        async function updateMapMarkers(results) {
+            if (!map) return;
+            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+            markers.forEach(m => m.map = null); markers = [];
+            
+            const groups = {};
+            results.forEach(r => {
+                const key = r.lat + "," + r.lng;
+                if (!groups[key] || r.timeValue < groups[key].timeValue) groups[key] = r;
+            });
+
+            Object.values(groups).forEach(m => {
+                const pinDiv = document.createElement("div");
+                let nCls = `marker-${(m.nusach || 'Other').replace(/\s+/g, '-')}`;
+                pinDiv.className = `custom-marker ${nCls}`;
+                pinDiv.textContent = (m.timeValue === 9999) ? "?" : `${m.timeDisplay}`; 
+
+                const marker = new AdvancedMarkerElement({
+                    map: map, position: { lat: m.lat, lng: m.lng },
+                    content: pinDiv, title: m.name
+                });
+                marker.element.addEventListener("click", () => openDetails(m));
+                markers.push(marker);
+            });
+        }
+
+        function onMapIdle() {
+            if (isProgrammaticMove) { isProgrammaticMove = false; return; }
+            if(!map) return;
+            const center = map.getCenter();
+            const bounds = map.getBounds();
+            if(!center || !bounds) return;
+
+            searchCenter = { lat: center.lat(), lng: center.lng() };
+            document.getElementById("status-pill").innerText = `Near: Map Center`;
+
+            const ne = bounds.getNorthEast();
+            const r = getDistance(center.lat(), center.lng(), ne.lat(), ne.lng());
+            
+            document.getElementById("radius-input").value = r.toFixed(1);
+            document.getElementById("radius-slider").value = r.toFixed(1);
+            document.getElementById("map-radius-pill").innerText = `Map Radius: ${r.toFixed(1)} mi`;
+            currentRadius = r;
+            
+            applyFilters();
+        }
+
+        function formatList(list) {
+            if(!list || list.length === 0) return 'None';
+            // Convert standard HH:MM to 7:00a format
+            return list.map(t => formatTimeShort(t)).join(", ");
+        }
+
+        function openDetails(m) {
+            selectedShul = m;
+            const godavenId = m.godaven_link ? m.godaven_link.split('/').pop() : m.id;
+            const link = `https://www.godaven.com/shul-details/${godavenId}`;
+            const nCls = `nusach-${(m.nusach || 'Other').replace(/\s+/g, '-')}`;
+            const content = document.getElementById("drawer-content");
+            const headerContent = document.getElementById("drawer-header-content");
+            
+            // Build Sticky Header
+            let rabbiInfo = m.rabbi && m.rabbi !== "Rabbi Not Listed" ? `<div class="drawer-subtitle"><i class="material-icons" style="font-size:14px;">person</i> ${m.rabbi}</div>` : '';
+            headerContent.innerHTML = `
+                <h2 class="drawer-title">${m.name}</h2>
+                ${rabbiInfo}
+                <div class="drawer-address">${m.address}</div>
+                <div class="nusach-tag ${nCls}" style="margin-top:8px;">${m.nusach}</div>
+            `;
+
+            // Build Contacts
+            let contacts = [];
+            if(m.phone) contacts.push(`<a href="tel:${m.phone}" class="contact-btn"><i class="material-icons">call</i> Call</a>`);
+            if(m.email) contacts.push(`<a href="mailto:${m.email}" class="contact-btn"><i class="material-icons">email</i> Email</a>`);
+            contacts.push(`<a href="${link}" target="_blank" rel="noopener noreferrer" class="contact-btn"><i class="material-icons">open_in_new</i> GoDaven</a>`);
+
+            content.innerHTML = `
+                <div class="contact-row">${contacts.join('')}</div>
+
+                <div class="schedule-section">
+                    <div class="schedule-title">Weekday Schedule</div>
+                    <div class="schedule-grid">
+                        <div class="schedule-item"><div class="schedule-day">Shacharis Sun</div>${formatList(m.shacharis?.sun)}</div>
+                        <div class="schedule-item"><div class="schedule-day">Shacharis M/Th</div>${formatList(m.shacharis?.mon_thu)}</div>
+                        <div class="schedule-item"><div class="schedule-day">Shacharis T/W/F</div>${formatList(m.shacharis?.tue_wed_fri)}</div>
+                        <div class="schedule-item"><div class="schedule-day">Rosh Chodesh</div>${formatList(m.shacharis?.rosh_chodesh)}</div>
+                        <div class="schedule-item"><div class="schedule-day">Mincha</div>${formatList(m.mincha?.week)}</div>
+                        <div class="schedule-item"><div class="schedule-day">Maariv</div>${formatList(m.maariv?.week)}</div>
+                    </div>
+                </div>
+
+                <div class="schedule-section">
+                    <div class="schedule-title">Shabbos Schedule</div>
+                    <div class="schedule-grid">
+                        <div class="schedule-item"><div class="schedule-day">Mincha Erev Shab</div>${formatList(m.mincha?.fri)}</div>
+                        <div class="schedule-item"><div class="schedule-day">Mincha Shabbos</div>${formatList(m.mincha?.shabbos)}</div>
+                        <div class="schedule-item"><div class="schedule-day">Maariv Motzei</div>${formatList(m.maariv?.shabbos)}</div>
+                    </div>
+                </div>
+            `;
+            const drawer = document.getElementById("details-drawer");
+            drawer.classList.add("open");
+            drawer.style.transform = "translateY(0)";
+            document.getElementById("scrim").style.display = "block";
+        }
+
+        async function shareShul() {
+            if(!selectedShul) return;
+            const godavenId = selectedShul.godaven_link ? selectedShul.godaven_link.split('/').pop() : selectedShul.id;
+            const link = `https://www.godaven.com/shul-details/${godavenId}`;
+            
+            const text = `Shared by ShulTime:\n\n${selectedShul.name}\n${selectedShul.address}\n\nNusach: ${selectedShul.nusach}\nLink: ${link}\n\nWEEKDAY TIMES:\nShacharis Sun: ${formatList(selectedShul.shacharis?.sun)}\nShacharis M/Th: ${formatList(selectedShul.shacharis?.mon_thu)}\nMincha: ${formatList(selectedShul.mincha?.week)}\nMaariv: ${formatList(selectedShul.maariv?.week)}`;
+            
+            if(navigator.share) {
+                try { await navigator.share({ title: selectedShul.name, text: text, url: link }); } 
+                catch(e) { console.log('Share failed', e); }
+            } else {
+                navigator.clipboard.writeText(text);
+                alert("Details copied to clipboard!");
+            }
+        }
+
+        function closeDetails() {
+            const drawer = document.getElementById("details-drawer");
+            drawer.classList.remove("open");
+            drawer.style.transform = "translateY(100%)";
+            document.getElementById("scrim").style.display = "none";
+        }
+
+        function initPullToDismiss() {
+            // Disabled pull to dismiss
+        }
+
+        function toggleFilters() {
+            const d = document.getElementById('filter-drawer');
+            d.style.display = (d.style.display==='block') ? 'none' : 'block';
+        }
+
+        function setFilter(type, val, btn) {
+            filters[type] = val;
+            const group = btn.parentElement;
+            group.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            applyFilters();
+        }
+
+        function setAllDay() { document.getElementById('time-start').value = "00:00"; document.getElementById('time-end').value = "23:59"; applyFilters(); }
+        
+        function setNextHour() {
+            const now = new Date(); const pad = n => String(n).padStart(2,'0');
+            document.getElementById('time-start').value = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+            const next = new Date(now.getTime() + 60*60*1000);
+            document.getElementById('time-end').value = `${pad(next.getHours())}:${pad(next.getMinutes())}`;
+            applyFilters();
+        }
+
+        function onStartTimeChange() {
+            const [h,m] = document.getElementById('time-start').value.split(':').map(Number);
+            let endH = h + 1; if(endH > 23) endH = 23;
+            document.getElementById('time-end').value = `${String(endH).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+            applyFilters();
+        }
+
+        function useMyLocation() {
+            navigator.geolocation.getCurrentPosition(pos => {
+                setSearchLocation(pos.coords.latitude, pos.coords.longitude, "Current Location");
+            }, e => alert("Please enable GPS/Location services."));
+        }
+
+        function clearSearch(){
+            searchCenter = null;
+            document.getElementById("status-pill").style.display = "none";
+            document.getElementById("count-pill").style.display = "none";
+            document.getElementById("map-radius-pill").style.display = "none";
+            document.getElementById("list-view").innerHTML = `
+                <div class="empty-state">
+                    <i class="material-icons" style="font-size:54px; margin-bottom:15px; color: var(--primary); opacity: 0.8;">explore</i><br>
+                    <strong>Welcome to ShulTime</strong><br><br>
+                    <b>1. Search</b> for a city or zip code.<br>
+                    <b>2. Filter</b> by time or Nusach.<br>
+                    <b>3. Tap</b> the target to use GPS.
+                </div>`;
+            const el = document.querySelector('gmp-place-autocomplete');
+            if(el) el.value = null;
+            if(map) { markers.forEach(m => m.map = null); }
+        }
+
+        function getDistance(lat1, lon1, lat2, lon2){
+            const R = 3958.8; const dLat = (lat2 - lat1) * Math.PI / 180; const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLon/2)**2;
+            return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+        }
+
+        async function initApp(){
+            const { Map } = await google.maps.importLibrary("maps");
+            const { PlaceAutocompleteElement } = await google.maps.importLibrary("places");
+            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+            const autocomplete = new PlaceAutocompleteElement();
+            autocomplete.setAttribute("types", "(cities)");
+            autocomplete.placeholder = "Search City...";
+            const container = document.getElementById("autocomplete-container");
+            container.appendChild(autocomplete);
+
+            map = new Map(document.getElementById("map-view"), {
+                center: { lat: 40.091, lng: -74.218 },
+                zoom: 12, disableDefaultUI: true, mapId: "DEMO_MAP_ID"
+            });
+
+            map.addListener('idle', onMapIdle);
+
+            autocomplete.addEventListener('input', () => { if (!autocomplete.value) clearSearch(); });
+
+            autocomplete.addEventListener("gmp-select", async (event) => {
+                if (event.placePrediction) {
+                    if (document.activeElement) document.activeElement.blur();
+                    setTimeout(() => { if (document.activeElement) document.activeElement.blur(); }, 200);
+
+                    const place = event.placePrediction.toPlace();
+                    await place.fetchFields({ fields: ["displayName", "location"] });
+                    setSearchLocation(place.location.lat(), place.location.lng(), place.displayName);
+                }
+            });
+        }
     </script>
-
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOpNebt0dPJUmiEw-i1W-Dx_UezLpIvxI&loading=async&libraries=places,maps,marker&callback=initApp"></script>
 </body>
 </html>
